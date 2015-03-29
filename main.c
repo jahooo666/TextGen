@@ -1,12 +1,12 @@
-//#include "input.h"
-//#include "output.h"
-//#include "ngramArray.h"
-//#include "wordArray.h"
+#include "input.h"
+#include "output.h"
+#include "ngramArray.h"
+#include "wordArray.h"
 #include <stdio.h>
 
 int main(){
 
-print("Zrobione");
+printf("Zrobione");
 
-return 0;
+
 }
