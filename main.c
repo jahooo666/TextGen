@@ -29,15 +29,15 @@ int help(){
 
 
 int main(int argc, char *argv[]){
+int i, is, ia, rng; 
+int stat=0; 									//TODO ostatecznie ma byc domyslnie 1
+char* inFile[15];								// tablice nazw plikow
+char* nginFile[15];								//------------
+char* ngoutFile;
+char* outFile;
+int a; 										//aktualna pozycja w tablicy stringow 
 
-int i, is, ia, rng;
-char* inFile[15];
-char* outFile[15];
-char* ngoutFile[15]; // tablice nazw plikow
-char* nginFile[15];
-int a; 								//aktualna pozycja w tablicy stringow 
-
-	for (i = 1; i < (argc -1); i++){
+	for (i = 1; i < (argc -1); i++){				// pliki wejsciowe z tekstem - maksymalnie 15
 		if (strcmp("-in", argv[i]) == 0) {
 			a=0;
 			printf("in: ");
@@ -51,7 +51,7 @@ int a; 								//aktualna pozycja w tablicy stringow
 			continue;
 		}
 		
-		if (strcmp("-ngin", argv[i]) == 0) {
+		if (strcmp("-ngin", argv[i]) == 0) {		// pliki wejsciowe z danymi - maksymalnie 15
 			a=0;
 			printf("ngin: ");
 			while(argv[++i][0]!='-'){
@@ -64,52 +64,47 @@ int a; 								//aktualna pozycja w tablicy stringow
 			continue;
 		}
 		
-		if (strcmp("-out", argv[i]) == 0) {
-			a=0;
-			printf("out: ");
-			while(argv[++i][0]!='-'){
-				outFile[a]=argv[i];
-				printf("--[ %s ]",outFile[a]);				
-				a++;
-			}
-			printf("\n");	
+		if (strcmp("-out", argv[i]) == 0) {		// nazwa pliku do ktorego bedzie zapisywany tekst
+			if (argv[++i][0]!='-')
+			outFile=argv[i];
 			i--;
+			printf("out = %s\n", outFile);
 			continue;
 		}
 		
-		if (strcmp("-ngout", argv[i]) == 0) {
-			a=0;
-			printf("ngout: ");
-			while(argv[++i][0]!='-'){
-				ngoutFile[a]=argv[i];
-				printf("--[ %s ]",ngoutFile[a]);				
-				a++;
-			}
-			printf("\n");	
+		if (strcmp("-ngout", argv[i]) == 0) {		// nazwa pliku do ktorego beda zapisywane dane slow
+			if (argv[++i][0]!='-')
+				ngoutFile=argv[i];
 			i--;
+			printf("ngout = %s\n", ngoutFile);
 			continue;
 		}
 		
-		if (strcmp("-is", argv[i]) == 0) {
+		if (strcmp("-is", argv[i]) == 0) {			// ilosc slow do wygenerowania
 			is = atoi(argv[++i]);
 			printf("is = %d\n", is);
 			continue;
 		}
 		
-		if (strcmp("-ia", argv[i]) == 0) {
+		if (strcmp("-ia", argv[i]) == 0) {			//ilosc akapitow na ktore ma byc podzielony tekst
 			ia = atoi(argv[++i]);
 			printf("ia = %d\n", ia);
 			continue;
 		}
 		
-		if (strcmp("-rng", argv[i]) == 0) {
+		if (strcmp("-rng", argv[i]) == 0) {		//rzad ngramow 
 			rng = atoi(argv[++i]);
 			printf("rng = %d\n", rng);
 			continue;
 		}
 		
-		if (strcmp("-stat", argv[i]) == 0) {
-			printf("stat = %s\n", argv[++i]);
+		if (strcmp("-stat", argv[i]) == 0) {		//czy maja byc generowane statystyki
+			if(atoi(argv[++i])!='0')
+				//printf("atoi :%d", atoi(argv[i]));
+				stat=atoi(argv[i]);
+				else stat=0;
+			i--;
+			printf("stat = %d\n", stat);
 			continue;
 		}
 		
