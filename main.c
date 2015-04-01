@@ -30,7 +30,7 @@ int help(){
 
 int main(int argc, char *argv[]){
 int i, is, ia, rng; 
-int stat=0; 									//TODO ostatecznie ma byc domyslnie 1
+int stat=1; 									
 char* inFile[15];								// tablice nazw plikow
 char* nginFile[15];								//------------
 char* ngoutFile;
@@ -99,10 +99,10 @@ int a; 										//aktualna pozycja w tablicy stringow
 		}
 		
 		if (strcmp("-stat", argv[i]) == 0) {		//czy maja byc generowane statystyki
-			if(atoi(argv[++i])!='0')
-				//printf("atoi :%d", atoi(argv[i]));
-				stat=atoi(argv[i]);
-				else stat=0;
+			i++;
+			if(((strcmp(argv[i],"0"))==0)||((strcmp(argv[i],"false"))==0))				//||(strcmp("false", argv[i]) == 0)
+				stat=0;
+			else stat=1;
 			i--;
 			printf("stat = %d\n", stat);
 			continue;
