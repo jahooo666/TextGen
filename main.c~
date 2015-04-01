@@ -29,13 +29,56 @@ int help(){
 
 
 int main(int argc, char *argv[]){
-
-if (argc==1)
-printf("jeden");
-if (argc==2)
-printf("dwa");
-if (argc==3)
-printf("czy");
-
+int i, is, ia, rng;
+char* sdr;
+	for (i = 1; i < (argc -1); i++){
+		if (strcmp("-in", argv[i]) == 0) {
+			printf("in = %s\n", argv[++i]);
+			continue;
+		}
+		
+		if (strcmp("-ngin", argv[i]) == 0) {
+			printf("ngin = %s\n", argv[++i]);
+			continue;
+		}
+		
+		if (strcmp("-out", argv[i]) == 0) {
+			printf("out = %s\n", argv[++i]);
+			continue;
+		}
+		
+		if (strcmp("-ngout", argv[i]) == 0) {
+			printf("ngout = %s\n", argv[++i]);
+			continue;
+		}
+		
+		if (strcmp("-is", argv[i]) == 0) {
+			is = atoi(argv[++i]);
+			printf("is = %d\n", is);
+			continue;
+		}
+		
+		if (strcmp("-ia", argv[i]) == 0) {
+			ia = atoi(argv[++i]);
+			printf("ia = %d\n", ia);
+			continue;
+		}
+		
+		if (strcmp("-rng", argv[i]) == 0) {
+			rng = atoi(argv[++i]);
+			printf("rng = %d\n", rng);
+			continue;
+		}
+		
+		if (strcmp("-stat", argv[i]) == 0) {
+			printf("stat = %s\n", argv[++i]);
+			continue;
+		}
+		
+		if ((argv[i][0]=='*')) {
+			printf("mamy gwiazdke %s\n", argv[++i]);
+			continue;
+		}
+	}
 
 }
