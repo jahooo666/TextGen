@@ -100,7 +100,7 @@ int a; 										//aktualna pozycja w tablicy stringow
 		
 		if (strcmp("-stat", argv[i]) == 0) {		//czy maja byc generowane statystyki
 			i++;
-			if(((strcmp(argv[i],"0"))==0)||((strcmp(argv[i],"false"))==0))				//||(strcmp("false", argv[i]) == 0)
+			if(((strcmp(argv[i],"0"))==0)||((strcmp(argv[i],"false"))==0))	// beda generowane o ile po "-stat" nie zostanie napisane "0" lub "false"
 				stat=0;
 			else stat=1;
 			i--;
