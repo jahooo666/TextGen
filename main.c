@@ -29,11 +29,20 @@ int help(){
 
 
 int main(int argc, char *argv[]){
+
 int i, is, ia, rng;
-char* inFile, outFile, nginFile, ngoutFile;
+int a; 							//aktualna pozycja w tablicy stringow 
+char** inFile, outFile, nginFile, ngoutFile;
 	for (i = 1; i < (argc -1); i++){
 		if (strcmp("-in", argv[i]) == 0) {
-			printf("in = %s\n", argv[++i]);
+			a=0;
+			while(argv[++i][0]!='-'){
+				inFile[a]=argv[i];
+				printf("[ %s ]--",inFile[a]);				
+				a++;
+			}
+			printf("\n");	
+			i--;
 			continue;
 		}
 		
