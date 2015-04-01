@@ -31,14 +31,19 @@ int help(){
 int main(int argc, char *argv[]){
 
 int i, is, ia, rng;
-int a; 							//aktualna pozycja w tablicy stringow 
-char** inFile, outFile, nginFile, ngoutFile;
+char* inFile[6];
+char* outFile[6];
+char* ngoutFile[6]; // tablice nazw plikow
+char* nginFile[6];
+int a; 								//aktualna pozycja w tablicy stringow 
+
 	for (i = 1; i < (argc -1); i++){
 		if (strcmp("-in", argv[i]) == 0) {
 			a=0;
+			printf("in: ");
 			while(argv[++i][0]!='-'){
-				inFile[a];
-				printf("[ %s ]--",inFile[a]);				
+				inFile[a]=argv[i];
+				printf("--[ %s ]",inFile[a]);				
 				a++;
 			}
 			printf("\n");	
@@ -47,17 +52,41 @@ char** inFile, outFile, nginFile, ngoutFile;
 		}
 		
 		if (strcmp("-ngin", argv[i]) == 0) {
-			printf("ngin = %s\n", argv[++i]);
+			a=0;
+			printf("ngin: ");
+			while(argv[++i][0]!='-'){
+				nginFile[a]=argv[i];
+				printf("--[ %s ]",nginFile[a]);				
+				a++;
+			}
+			printf("\n");	
+			i--;
 			continue;
 		}
 		
 		if (strcmp("-out", argv[i]) == 0) {
-			printf("out = %s\n", argv[++i]);
+			a=0;
+			printf("out: ");
+			while(argv[++i][0]!='-'){
+				outFile[a]=argv[i];
+				printf("--[ %s ]",outFile[a]);				
+				a++;
+			}
+			printf("\n");	
+			i--;
 			continue;
 		}
 		
 		if (strcmp("-ngout", argv[i]) == 0) {
-			printf("ngout = %s\n", argv[++i]);
+			a=0;
+			printf("ngout: ");
+			while(argv[++i][0]!='-'){
+				ngoutFile[a]=argv[i];
+				printf("--[ %s ]",ngoutFile[a]);				
+				a++;
+			}
+			printf("\n");	
+			i--;
 			continue;
 		}
 		
