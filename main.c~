@@ -75,10 +75,7 @@ char* sdr;
 			continue;
 		}
 		
-		if ((argv[i][0]=='*')) {
-			printf("mamy gwiazdke %s\n", argv[++i]);
-			continue;
-		}
+		
 	}
 
 }

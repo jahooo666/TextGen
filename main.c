@@ -30,7 +30,7 @@ int help(){
 
 int main(int argc, char *argv[]){
 int i, is, ia, rng;
-char* sdr;
+char* inFile, outFile, nginFile, ngoutFile;
 	for (i = 1; i < (argc -1); i++){
 		if (strcmp("-in", argv[i]) == 0) {
 			printf("in = %s\n", argv[++i]);
@@ -75,10 +75,7 @@ char* sdr;
 			continue;
 		}
 		
-		if ((argv[i][0]=='*')) {
-			printf("mamy gwiazdke %s\n", argv[++i]);
-			continue;
-		}
+		
 	}
 
 }
