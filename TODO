@@ -7,7 +7,7 @@
 -otwieranie plikow
 -na poczatek tylko czytanie listy slow z tekstu
 -jeszcze ignorujemy ngramy
-
+-wstepnie zaimplementowac tablice dynamiczna
 
 ----WORDLIST-----
 -napisac strukture
@@ -16,4 +16,5 @@
 -funkcja szukania slowa
 -funkcja dodawania slowa
 -funkcja zwiekszajaca ilosc wystapien
+
 
