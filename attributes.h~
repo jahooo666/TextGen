@@ -16,7 +16,7 @@ typedef struct {
 	int nginFileNumber;
 	char *outFile;
 	char *ngoutFile;
-	int error;
+	int Error;
 
 } attributes_t;
 

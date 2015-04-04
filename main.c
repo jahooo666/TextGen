@@ -12,10 +12,20 @@
 
 int main(int argc, char **argv){
 
-attributes_t attributes;
-
-attributes = readAttributes(argc, argv);
-
-printAttributes(attributes);
+	attributes_t attributes;
+	attributes = readAttributes(argc, argv);
+	
+	if (attributes.error == 0){
+		printAttributes(attributes);
+		
+		
+		
+		
+		
+		
+			
+	}
+	else 
+		return 0; 
 	
 }

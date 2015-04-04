@@ -52,7 +52,7 @@ attributes_t readAttributes(int argc, char** argv){
 			}
 			if (a==0){
 				attributes.inFileNumber = 0;
-				attributes.inFile[a] = "brak";
+				attributes.inFile[a]="brak";
 			}	
 			else attributes.inFileNumber = --a;
 			i--;
@@ -123,11 +123,11 @@ attributes_t readAttributes(int argc, char** argv){
 
 int printAttributes(attributes_t attributes){
 	int a;
-	printf("1Atrybuty tego wejscia to: \n");
+	printf("Atrybuty tego wejscia to: \n");
 	
 	printf("Pliki wejsciowe(inFile): ");	
 	a=0;
-	while(a<=attributes.inFileNumber){
+	while(a<attributes.inFileNumber){
 		printf("--[ %s ]",attributes.inFile[a]);
 		a++;
 	}
@@ -135,7 +135,7 @@ int printAttributes(attributes_t attributes){
 	
 	printf("Pliki wejsciowe bazy(nginFile): ");
 	a=0;
-	while(a<=attributes.nginFileNumber){
+	while(a<attributes.nginFileNumber){
 		printf("--[ %s ]",attributes.nginFile[a]);
 		a++;
 	}	
