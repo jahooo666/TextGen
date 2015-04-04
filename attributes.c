@@ -34,13 +34,17 @@ attributes_t readAttributes(int argc, char** argv){
 	int ngramLevelDefault;
 	int statisticsDefault;
 	int errorDefault;
+	int inFileNumberDefault;
+	int nginFileNumberDefault;
 	
 	outFileDefault = "output.txt"; attributes.outFile = outFileDefault; 
 	ngoutFileDefault = "base.mlg"; attributes.ngoutFile = ngoutFileDefault;
 	wordNumberDefault = 100; attributes.wordNumber = wordNumberDefault;
 	paragraphNumberDefault = 3; attributes.paragraphNumber = paragraphNumberDefault;
 	ngramLevelDefault = 3; attributes.ngramLevel = ngramLevelDefault;
-	statisticsDefault = 0; attributes.statistics = statisticsDefault;						
+	statisticsDefault = 0; attributes.statistics = statisticsDefault;
+	inFileNumberDefault = 0; attributes.inFileNumber = inFileNumberDefault;
+	nginFileNumberDefault = 0; attributes.nginFileNumber = nginFileNumberDefault;					
 	errorDefault = 0; attributes.error = errorDefault;
 	
 	for (i = 1; i < (argc -1); i++){				// pliki wejsciowe z tekstem - maksymalnie 15
@@ -69,7 +73,7 @@ attributes_t readAttributes(int argc, char** argv){
 				attributes.nginFileNumber = 0;
 				attributes.nginFile[a]="brak";
 			}	
-			else attributes.inFileNumber = --a;
+			else attributes.nginFileNumber = --a;
 			i--;
 			continue;
 		}
@@ -115,15 +119,15 @@ attributes_t readAttributes(int argc, char** argv){
 		
 	}
 	if ((attributes.inFileNumber == 0)&&(attributes.nginFileNumber == 0)){
-		printf("Nie zostaly podane wymagane dane wejsciowe. Prosze podac minimum jeden plik wejsciowy lub bazowy");
+		printf("Nie zostaly podane wymagane dane wejsciowe.\n Prosze podac minimum jeden plik wejsciowy lub bazowy\n");
 		attributes.error = 1;
 	}
 	return attributes;
 }
 
-int printAttributes(attributes_t attributes){
+	int printAttributes(attributes_t attributes){
 	int a;
-	printf("1Atrybuty tego wejscia to: \n");
+	printf("Atrybuty tego wejscia to: \n");
 	
 	printf("Pliki wejsciowe(inFile): ");	
 	a=0;
