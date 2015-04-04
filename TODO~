@@ -1,3 +1,19 @@
--napisac makefile'a
--sprobowac przeniesc cale odczytywanie argumentow do oddzielnego modulu
--
+------INPUT-----
+-otwieranie plikow
+-na poczatek tylko czytanie listy slow z tekstu
+-jeszcze ignorujemy ngramy
+
+
+----TABLICA DYNAMICZNA----------
+-wstepnie zaimplementowac
+-sprawdzic jak zrobic tablice dynamiczna struktur
+
+----WORDLIST-----
+-napisac strukture
+
+
+-funkcja szukania slowa
+-funkcja dodawania slowa
+-funkcja zwiekszajaca ilosc wystapien
+
+
