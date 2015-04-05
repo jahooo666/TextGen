@@ -2,8 +2,14 @@
 #define INPUT_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-char ** czytajTekstZPliku( FILE* zrodlo);
-char ** czytajDaneZPliku( FILe* zrodlo);
+#include "wordArray.h"
+//#include "ngramArray.h"
+
+int countWordsInText( char *fileName);
+word_t *readWordsFromTextFiles( char **fileName, int fileNumber, int totalWordNumber);
+//ngramElem *readDataFromBaseFile( char *fileName);
 
 #endif

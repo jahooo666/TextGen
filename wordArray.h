@@ -14,7 +14,7 @@ typedef struct{
 
 int createWord(char* newWord);
 word_t* findWord(word_t *wordArray, char *soughtWord);
-void addOccurence(wordt_t word);
+void addOccurence(word_t word);
 
 	
 
