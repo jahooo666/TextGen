@@ -7,12 +7,13 @@
 
 
 typedef struct{
-	char text[255];
+	char text[255]; //pojedyncze slowo moze miec maksymalnie 255 liter
 	int numberOfOccurences;
 
 }word_t;
+int findWord(word_t *wordArray,int arraySize, char *soughtWord);
+ //zwraca index pierwszego elementu z takim samm tekstem
 
-//word_t* findWord(word_t *wordArray, char *soughtWord);
 	
 
 #endif
