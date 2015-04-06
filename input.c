@@ -23,32 +23,35 @@ int countWordsInText( char *fileName){
 
 
 
-word_t *readWordsFromTextFiles( char **fileName, int fileNumber, int totalWordNumber){
-	word_t *wordArray;
-	wordArray = malloc(totalWordNumber*sizeof(word_t));
+int readWordsFromTextFiles( char **fileName, int fileNumber, int totalWordNumber, word_t* wordArray){
+	//word_t wordArray[totalWordNumber];
+	//wordArray = malloc(totalWordNumber*sizeof(word_t));
 	int i,j;
 	j=0;
 	
 	
 	for(i=1; i<fileNumber; i++){
 		FILE *textFile;
-		char buffer[255];
+		//char buffer[255];
 		textFile = fopen(fileName[i],"r");
-		while(fscanf(textFile,"%s",buffer)!= EOF){	
-			wordArray[j].text = malloc(255*sizeof(char));
-			printf("%s-\t",buffer);
-			wordArray[j].text = buffer;
+		word_t newWord;
+		while(fscanf(textFile,"%s",newWord.text)!= EOF){	
+			
+			//newWord.text = buffer;
+			//printf("%s-\t",buffer);
+			newWord.numberOfOccurences = j;	
+			wordArray[j] = newWord;
 			j++;
 		}
 	}
 //TODO trzeba poprawic cale to budowanie tablicy te wszystkie 255, powinno sie to jakos zainicjowac moze.-> jak najszybciej	
 	
-	return wordArray;
+	return 1;
 }
 
 
 int main(int argc, char **argv){
-	int i;
+	int i,j;
 	int totalWordNumber = 0; 
 	
 	
@@ -58,11 +61,26 @@ int main(int argc, char **argv){
 	
 	printf("calkowita liczba slow we wszystkich plikach to: %d\n",totalWordNumber);
 	word_t *wordArray;
+	//char *sloowo = "lol";
 	wordArray = malloc(totalWordNumber*sizeof(word_t));
-	wordArray = readWordsFromTextFiles(argv,argc,totalWordNumber);
-	for(i=0;i<totalWordNumber;i++)
-		printf("%s\n",wordArray[i].text);
+	for(i=0;i<totalWordNumber;i++){
+		word_t newWord;
+		
+		newWord.numberOfOccurences =12;
+		wordArray[i] = newWord; 
+		printf("%s----%d\n",newWord.text,newWord.numberOfOccurences);
+	}
 	
+	
+	int error = readWordsFromTextFiles(argv,argc,totalWordNumber,wordArray);
+	
+	
+	
+	
+	for(i=0;i<totalWordNumber;i++){
+		word_t newWord = wordArray[i]; 
+		printf("%s----%d\n",newWord.text,newWord.numberOfOccurences);
+	}
 }
 
 //ngramElem *readDataFromBaseFile( char *fileName);

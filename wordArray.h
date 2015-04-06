@@ -7,7 +7,7 @@
 
 
 typedef struct{
-	char *text;
+	char text[255];
 	int numberOfOccurences;
 
 }word_t;
