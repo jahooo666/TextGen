@@ -9,7 +9,7 @@
 //#include "ngramArray.h"
 
 int countWordsInText( char *fileName);
-int readWordsFromTextFiles( char **fileName, int fileNumber,word_t *wordArray);
+int readWordsFromTextFiles( char **fileName, int fileNumber,&word_t &wordArray);
 //ngramElem *readDataFromBaseFile( char *fileName);
 
 #endif

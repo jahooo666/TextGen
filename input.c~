@@ -23,7 +23,7 @@ int countWordsInText( char *fileName){
 
 
 
-int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
+int readWordsFromTextFiles( char **fileName, int fileNumber,word_t *wordArray){
 	int i,j,ind;
 	j = 0;//takie i dla niepowtarzalnych slow
 	int totalWordNumber = 0; 
@@ -36,7 +36,7 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 	}
 	printf("totalWordNumber = %d",totalWordNumber);
 	//tworzenie tablicy word_t
-	//wordArray = malloc(totalWordNumber*sizeof(word_t));
+	wordArray = malloc(totalWordNumber*sizeof(word_t));
 	//wczytywanie slow do tablicyc i ustalenie nowej liczby slow- teraz bez powtorzen
 	
 	

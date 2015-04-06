@@ -59,7 +59,7 @@ attributes_t readAttributes(int argc, char** argv){
 				attributes.inFileNumber = 0;
 				attributes.inFile[a] = "brak";
 			}	
-			else attributes.inFileNumber = --a;
+			else attributes.inFileNumber = a;
 			i--;
 			continue;
 		}

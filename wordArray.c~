@@ -15,7 +15,7 @@ int findWord(word_t *wordArray, int arraySize, char *soughtWord){
 			sought = i;
 		i++;
 	}
-	
+	printf("findWord");
 	return(sought);	
 }
 	
