@@ -1,8 +1,0 @@
-main: main.c attributes.c 
-	cc -o main main.c attributes.c
-	
-clean:
-	-rm main.o attributes
-	
-.PHONY: clean
-
