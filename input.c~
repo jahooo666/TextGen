@@ -85,7 +85,7 @@ int main(int argc, char **argv){
 	
 	newTotalWordNumber = readWordsFromTextFiles(argv,argc,totalWordNumber,wordArray);
 	
-	for(i=0;i<newTotalWordNumber;i++){
+	for(i=0;i<newtotalWordNumber;i++){
 		word_t newWord = wordArray[i]; 
 		printf("%s----%d\n",newWord.text,newWord.numberOfOccurences);
 	}

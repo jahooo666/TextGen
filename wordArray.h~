@@ -12,7 +12,7 @@ typedef struct{
 
 }word_t;
 
-//word_t* findWord(word_t *wordArray, char *soughtWord);
+word_t* findWord(word_t *wordArray, char *soughtWord);
 	
 
 #endif

@@ -1,2 +1,2 @@
-dwajeden dwadwa dwaczy
+dwajeden dwa dwa dwaczy
 dwacztery

@@ -11,5 +11,5 @@
 int countWordsInText( char *fileName);
 int readWordsFromTextFiles( char **fileName, int fileNumber, int totalWordNumber, word_t* wordArray);
 //ngramElem *readDataFromBaseFile( char *fileName);
-int findWord(word_t *wordArray,int arraySize, char *soughtWord);
+word_t* findWord(word_t *wordArray,int arraySize, char *soughtWord);
 #endif
