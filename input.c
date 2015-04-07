@@ -68,7 +68,8 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 	FILE *textFile;
 	ngram_t newNgram;
 	int tempWordIndexArray[ngramLevel];
-	int foundPosion;
+	int foundPosition;
+	int foundNext;
 	int lastNgramIndex; //<- index ostatnio uzywanego ngramu uzywany do laczenia ngramow
 	
 	for(i=0; i<fileNumber; i++){
@@ -80,8 +81,8 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 					fscanf(textFile,"%s",buffer);		//wczytaj do stringa slowo
 					newNgram.ngram[j] = findWord(wordArray, wordArraySize, buffer); //sprawdzajac i zapisujac po koleii indexy z wordArray
 				}
-				
-				if(foundPosion=findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newNgram)==(-1)){
+				foundPosition=findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newNgram);
+				if(==(foundPosition-1)){
 					
 					newNgram.numberOfOccurences=1;
 					ngramArray[currentNgramArrayPosition] = newNgram;
@@ -122,17 +123,21 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
 							newNgram.numberOfOccurences=1;
 							ngramArray[currentNgramArrayPosition] = newNgram;
-							//tu jest miejsce gdzie zaczynamy linkowac poprzedniego ngram do aktualnego
-								//if(findNext)=-1
-								//dodaj next
-								//else dodaj occurence do foundNext
+																	//tu jest miejsce gdzie zaczynamy linkowac poprzedniego ngram do aktualnego
+								foundNext=findNext(ngramArray[lastNgramIndex], currentNgramArrayPosition)
+								if(foundNext==-1){								//wypadek gdy nie wystapilo jeszcze takie przejscie
+									ngramArray[lastNgramIndex].nextNumber++;
+									int nextSize = ngramArray[lastNgramIndex].nextNumber;
+									ngramArray[lastNgramIndex].next[nextSize]=currentNgramArrayPosition;
+								}
+								else ngramArray[lastNgramIndex].next[foundNext].numberOfOccurences++;		//gdy takie przejscie juz nastapilo
 								ngramArray[lastNgramIndex].next[]
 							lastNgramIndex=currentNgramArrayPosition;
 							currentNgramArrayPosition++;
 						}	
 						else{
-							ngramArray[foundPosion].numberOfOccurences++; 
-							lastNgramIndex=foundPosion;
+							ngramArray[foundPosition].numberOfOccurences++; 
+							lastNgramIndex=foundPosition;
 						}
 				}
 	
@@ -141,6 +146,7 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 		}
 		else printf("Plik %s ma za malo slow- nie jest brany pod uwage przy tworzeniu ngramow",fileName[i]);	
 	}
+return 	
 }
 
 //TODO obsluga bledow

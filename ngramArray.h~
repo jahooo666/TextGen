@@ -13,10 +13,10 @@ typedef struct {
 
 
 typedef struct {
-	int nextNgram;//index z tablicy ngramow-> zawsze mniejszy niz indeks ngramu od ktorego odchodzi
+	int nextNgram;			//index z tablicy ngramow
 	int numberOfCollocations;//ile razy ten zwiazek sie powtorzyl
 } next_t;
 
-int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram); //tablica intow jako ostatni argument jest specjalnie- patrz struktura
-int findNext(ngram_t ngram, int nextNgramIndex)
+int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram); //tablica intow jako ostatni argument jest specjalnie- patrz struktura. zwraca inta- index w tablicy ngramow
+int findNext(ngram_t ngram, int nextNgramIndex); // jw
 #endif

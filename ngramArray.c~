@@ -28,8 +28,16 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 	return(sought);						//zwracamy index z ngram Array
 		
 }
-int findNext(ngram_t ngram, int nextNgramIndex){
-
+int findNext(ngram_t ngramElem, int nextNgramIndex){
+	int i;
+	int foundNext = -1;
+	if(ngramElem.nextNumber!=0){
+		for(i=0;i<ngramElem.nextNumber;i++){
+			if((ngramElem.next[i])==nextNgramIndex)
+				foundNext= nextNgramIndex;
+		}
+	}
+	return(foundNext);
 }
 int main(int argc,char** argv){
 	
