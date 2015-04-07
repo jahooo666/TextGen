@@ -24,6 +24,7 @@ int printWordArray(word_t *wordArray, int arraySize){
 	for(i=0;i<arraySize;i++){
 		word_t newWord = wordArray[i]; 
 		printf("%s\t\t%d\n",newWord.text,newWord.numberOfOccurences);
+		//TODO formatowanie listy slow
 	}
 
 }

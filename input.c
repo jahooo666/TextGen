@@ -21,6 +21,15 @@ int countWordsInText( char *fileName){
 }
 
 
+int countWordsInTextFiles( char **fileName, int fileNumber){
+	int totalWordNumber = 0; 
+	int i;
+	for(i=0; i<fileNumber; i++){
+		totalWordNumber += countWordsInText(fileName[i]);
+	}
+	printf("Liczba slow we wszystkich plikach to: = %d\n",totalWordNumber);
+	return totalWordNumber;
+}
 
 
 int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
@@ -31,10 +40,7 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 	
 	
 	//wstepne liczenie slow we wszystkich plikach
-	for(i=0; i<fileNumber; i++){
-		totalWordNumber += countWordsInText(fileName[i]);
-	}
-	printf("totalWordNumber = %d",totalWordNumber);
+	
 	//tworzenie tablicy word_t
 	//wordArray = malloc(totalWordNumber*sizeof(word_t));
 	//wczytywanie slow do tablicyc i ustalenie nowej liczby slow- teraz bez powtorzen
