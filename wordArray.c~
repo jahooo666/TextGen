@@ -4,7 +4,7 @@
 
 #include "wordArray.h"
 
-int findWord(word_t *wordArray, int arraySize, char *soughtWord){//zwraca index do tablicy slow
+int findWord(word_t *wordArray, int arraySize, char *soughtWord){//zwraca index do tablicy slow;
 	int  i = 0;
 	int sought =-1;
 	

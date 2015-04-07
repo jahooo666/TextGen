@@ -17,6 +17,6 @@ typedef struct {
 	int numberOfCollocations;//ile razy ten zwiazek sie powtorzyl
 } next_t;
 
-int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram); //tablica intow jako ostatni argument jest specjalnie- patrz struktura. zwraca inta- index w tablicy ngramow
-int findNext(ngram_t ngram, int nextNgramIndex) jw
+int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram); //tablica intow jako ostatni argument jest specjalnie- patrz struktura
+int findNext(ngram_t ngram, int nextNgramIndex)
 #endif

@@ -117,23 +117,6 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 						}
 						fscanf(textFile,"%s",buffer);			
 						tempWordIndexArray[ngramLevel-1] = findWord(wordArray, wordArraySize, buffer);//ostatni element uzupelniamy nowym slowem(jego indexem)
-						foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);//TODO sprawdzic czy to szukanie nie wchodzi na pamiec currentngramPosition!!!
-						if(foundPosition)==(-1)){
-							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
-							newNgram.numberOfOccurences=1;
-							ngramArray[currentNgramArrayPosition] = newNgram;
-							//tu jest miejsce gdzie zaczynamy linkowac poprzedniego ngram do aktualnego
-								//if(findNext)=-1
-								//dodaj next
-								//else dodaj occurence do foundNext
-								ngramArray[lastNgramIndex].next[]
-							lastNgramIndex=currentNgramArrayPosition;
-							currentNgramArrayPosition++;
-						}	
-						else{
-							ngramArray[foundPosion].numberOfOccurences++; 
-							lastNgramIndex=foundPosion;
-						}
 				}
 	
 			}
