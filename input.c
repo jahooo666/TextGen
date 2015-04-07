@@ -4,7 +4,7 @@
 
 #include "input.h"
 #include "wordArray.h"
-//#include "ngramArray.h"
+#include "ngramArray.h"
 
 int countWordsInText( char *fileName){
 	FILE *textFile;
@@ -52,7 +52,7 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 				j++;
 			}
 		}
-		fclose(textFile)
+		fclose(textFile);
 	}
 	
 	return j;
@@ -64,52 +64,64 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 	int i,j,k;
 	int currentNgramArrayPosition = 0; 
 	int first,last; 				//indexy do przechodzenia po tablicy 
-	char *buffer;
+	char buffer[255];
 	FILE *textFile;
 	ngram_t newNgram;
-	int tempWordIndexArray[ngramLevel];
+	
 	int foundPosition;
 	int foundNext;
 	int lastNgramIndex; //<- index ostatnio uzywanego ngramu uzywany do laczenia ngramow
-	
+	int wordsInText;
+	int temp;
+	printf("jestem w funkcji\n");
 	for(i=0; i<fileNumber; i++){
-		int wordsInText = countWordsInText( char *fileName);
+		wordsInText = countWordsInText(fileName[i]);
+		
+		
 		if( wordsInText >= ngramLevel ){
+		
 			FILE *textFile = fopen(fileName[i],"r");
 			if(wordsInText == ngramLevel){
 				for(j=0;j<ngramLevel;j++){		//dla takiej liczby slow w pliku = ngramLevel					
 					fscanf(textFile,"%s",buffer);		//wczytaj do stringa slowo
 					newNgram.ngram[j] = findWord(wordArray, wordArraySize, buffer); //sprawdzajac i zapisujac po koleii indexy z wordArray
 				}
-				foundPosition=findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newNgram);
-				if(==(foundPosition-1)){
-					
+				foundPosition=findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newNgram.ngram);
+				if(foundPosition==(-1)){					
 					newNgram.numberOfOccurences=1;
 					ngramArray[currentNgramArrayPosition] = newNgram;
 					currentNgramArrayPosition++;
 				}	
 				else
-					ngramArray[foundPosion].numberOfOccurences++; 	
+					ngramArray[foundPosition].numberOfOccurences++; 	
 			}
 			else	{			//wiemy ze liczba slow w pliku jest wieksza od rzedu ngramu
 				//znajdujemy sie teraz na poczatku pliku- inicjujemy tworzac pierwszy ngram
+				int tempWordIndexArray[ngramLevel];
 				for(j=0;j<ngramLevel;j++){
-					fscanf(textFile,"%s",buffer);			//czytanie slowa z pliku
-					tempWordIndexArray[j] = findWord(wordArray, wordArraySize, buffer);//sprawdzenie indexu slowa  z tablicy slow
 					
+					fscanf(textFile,"%s",buffer);		//czytanie slowa z pliku
+					//printf("czytam slowo %s\n",buffer);
+					temp = findWord(wordArray, wordArraySize, buffer);
+					tempWordIndexArray[j] = findWord(wordArray, wordArraySize, buffer);//sprawdzenie indexu slowa  z tablicy slow
+					//printf("przeczytalem slowo %d \n",temp);
 				}
 				
 				foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);
-						if(foundPosition)==(-1)){
+				printf("pozycja ngramu to :%d\n",foundPosition);
+						if(foundPosition==(-1)){
 							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
 							newNgram.numberOfOccurences=1;
 							ngramArray[currentNgramArrayPosition] = newNgram;
+							//printf("newNgram.ngram to :%d-%d-%d\n",ngramArray[currentNgramArrayPosition].ngram[0],ngramArray[currentNgramArrayPosition].ngram[1],ngramArray[currentNgramArrayPosition].ngram[2]);
+								
 							lastNgramIndex=currentNgramArrayPosition;
 							currentNgramArrayPosition++;
+													
 						}	
 						else{
-							ngramArray[foundPosion].numberOfOccurences++; 
-							lastNgramIndex=foundPosion;
+							ngramArray[foundPosition].numberOfOccurences++; 
+							lastNgramIndex=foundPosition;
 						}
 						
 				for(j=1;j<(wordsInText-ngramLevel);j++){
@@ -119,19 +131,19 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 						fscanf(textFile,"%s",buffer);			
 						tempWordIndexArray[ngramLevel-1] = findWord(wordArray, wordArraySize, buffer);//ostatni element uzupelniamy nowym slowem(jego indexem)
 						foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);//TODO sprawdzic czy to szukanie nie wchodzi na pamiec currentngramPosition!!!
-						if(foundPosition)==(-1)){
+						if(foundPosition==(-1)){
 							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
 							newNgram.numberOfOccurences=1;
 							ngramArray[currentNgramArrayPosition] = newNgram;
 																	//tu jest miejsce gdzie zaczynamy linkowac poprzedniego ngram do aktualnego
-								foundNext=findNext(ngramArray[lastNgramIndex], currentNgramArrayPosition)
+								foundNext=findNext(ngramArray[lastNgramIndex], currentNgramArrayPosition);
 								if(foundNext==-1){								//wypadek gdy nie wystapilo jeszcze takie przejscie
 									ngramArray[lastNgramIndex].nextNumber++;
 									int nextSize = ngramArray[lastNgramIndex].nextNumber;
-									ngramArray[lastNgramIndex].next[nextSize]=currentNgramArrayPosition;
+									ngramArray[lastNgramIndex].nextArray[nextSize].nextNgram=currentNgramArrayPosition;
 								}
-								else ngramArray[lastNgramIndex].next[foundNext].numberOfOccurences++;		//gdy takie przejscie juz nastapilo
-								ngramArray[lastNgramIndex].next[]
+								else ngramArray[lastNgramIndex].nextArray[foundNext].numberOfCollocations++;		//gdy takie przejscie juz nastapilo
+								// ngramArray[lastNgramIndex].nextArray[]; -chyba niepotrzebne ale boje sie wyrzucac
 							lastNgramIndex=currentNgramArrayPosition;
 							currentNgramArrayPosition++;
 						}	
@@ -146,7 +158,8 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 		}
 		else printf("Plik %s ma za malo slow- nie jest brany pod uwage przy tworzeniu ngramow",fileName[i]);	
 	}
-return 	
+	
+return currentNgramArrayPosition;	
 }
 
 //TODO obsluga bledow

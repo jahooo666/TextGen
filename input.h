@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include "wordArray.h"
-//#include "ngramArray.h"
+#include "ngramArray.h"
 
 int countWordsInText( char *fileName);
 int countWordsInTextFiles( char **fileName,int fileNumber);

@@ -28,7 +28,7 @@ int main(int argc, char **argv){
 			int error = printWordArray(wordArray, newWordNumber);
 			ngramArray = malloc((newWordNumber-attributes.ngramLevel)*(sizeof(ngram_t)));
 			int errora = readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, ngramArray, attributes.ngramLevel, wordArray, wordNumber);
-			printf("tyle jest ngramow: %d",errora);
+			
 		
 		
 		

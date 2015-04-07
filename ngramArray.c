@@ -33,14 +33,11 @@ int findNext(ngram_t ngramElem, int nextNgramIndex){
 	int foundNext = -1;
 	if(ngramElem.nextNumber!=0){
 		for(i=0;i<ngramElem.nextNumber;i++){
-			if((ngramElem.next[i])==nextNgramIndex)
+			if((ngramElem.nextArray[i].nextNgram)==nextNgramIndex)
 				foundNext= nextNgramIndex;
 		}
 	}
 	return(foundNext);
 }
-int main(int argc,char** argv){
-	
 
-}
 
