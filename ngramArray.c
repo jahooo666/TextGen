@@ -8,20 +8,25 @@
 
 int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram){ //tablica intow jako ostatni argument jest specjalnie- patrz struktura
 	//zwraca index z tablicy ngramow lub (-1) jezeli nie znalazl niczego
-	
-	int  i = 0;
+	printf("szukam ngramu\n");
+	int i = 0;
 	int j;
-	int sought =-1;
+	int sought =(-1);
 	int equal;
-	while((i<arraySize)&&(sought==(-1))){
+	while((i<arraySize)&&(sought==-1)){
+		printf("spelnione warunki\n");
 		ngram_t newNgram=ngramArray[i];
-		int equal=1;	//zmienna sluzy do sprawdzenia czy wszystkie przeiterowane indexy sa rowne- domyslnie jeden, 
+		equal=1;	//zmienna sluzy do sprawdzenia czy wszystkie przeiterowane indexy sa rowne- domyslnie jeden, 
 		for (j=0;j<ngramLevel;j++){
 			if(newNgram.ngram[j]!=soughtNgram[j])
-				equal=0;					//jak ktorykolwiek jest rozny, zmieniamy na zero
+				equal=0;
+								//jak ktorykolwiek jest rozny, zmieniamy na zero
 		}
-		if(equal==1)
-			sought = i;					//jezeli wytrwalo 1 to znaczy ze caly ngram jest taki sam
+		if(equal==1){
+		printf("porownuje takie tablice: ngramArray: %d-%d-%d-%d \n",newNgram.ngram[0],newNgram.ngram[1],newNgram.ngram[2],newNgram.ngram[3]);
+		printf("oraz: soughtNgram: %d-%d-%d-%d \n", soughtNgram[0],soughtNgram[1],soughtNgram[2],soughtNgram[3]);
+		 sought = i;
+		} 					//jezeli wytrwalo 1 to znaczy ze caly ngram jest taki sam
 		i++;
 	}
 	

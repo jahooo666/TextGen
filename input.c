@@ -104,9 +104,9 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 					//printf("czytam slowo %s\n",buffer);
 					temp = findWord(wordArray, wordArraySize, buffer);
 					tempWordIndexArray[j] = findWord(wordArray, wordArraySize, buffer);//sprawdzenie indexu slowa  z tablicy slow
-					//printf("przeczytalem slowo %d \n",temp);
+					printf("przeczytalem slowo %d \n",temp);
 				}
-				
+				printf("bede szukal takiej tablicy %d-%d-%d-%d \n",tempWordIndexArray[0],tempWordIndexArray[1],tempWordIndexArray[2],tempWordIndexArray[3]);
 				foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);
 				printf("pozycja ngramu to :%d\n",foundPosition);
 						if(foundPosition==(-1)){
@@ -131,6 +131,7 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArra
 						fscanf(textFile,"%s",buffer);			
 						tempWordIndexArray[ngramLevel-1] = findWord(wordArray, wordArraySize, buffer);//ostatni element uzupelniamy nowym slowem(jego indexem)
 						foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);//TODO sprawdzic czy to szukanie nie wchodzi na pamiec currentngramPosition!!!
+						printf("jestem az tutaj\n");
 						if(foundPosition==(-1)){
 							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
 							newNgram.numberOfOccurences=1;
