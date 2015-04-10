@@ -133,7 +133,7 @@ attributes_t readAttributes(int argc, char** argv){
 	printf("Pliki wejsciowe(inFile)(%d): ",attributes.inFileNumber);	
 	a=0;
 	while(a<=attributes.inFileNumber){
-		printf("--[ %s ]",attributes.inFile[a]);
+		printf("-[ %s ]",attributes.inFile[a]);
 		a++;
 	}
 	printf("\n");
@@ -141,7 +141,7 @@ attributes_t readAttributes(int argc, char** argv){
 	printf("Pliki wejsciowe bazy(nginFile): ");
 	a=0;
 	while(a<=attributes.nginFileNumber){
-		printf("--[ %s ]",attributes.nginFile[a]);
+		printf("-[ %s ]",attributes.nginFile[a]);
 		a++;
 	}	
 	printf("\n");
