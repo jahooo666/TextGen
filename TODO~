@@ -1,6 +1,5 @@
 ------INPUT-----
--wczytywanie ngramow
-
+-jeszcze ignorujemy ngramy
 
 
 ---WORDLIST-----
@@ -8,16 +7,9 @@
 
 --GENEROWANIE--
 -Pobrac ilosc slow--
---ilosc akapitow--
---
+--ilosc akapitow
 
 ----BLEDY---
 --oznaczenie bledow odpowiednimi nazwami--
 --przygotowanie czegos co bedzie je wylapywalo i rzucalo odpowiednie komunikaty
-
-
----OUTPUT---
--ogarnac zapisywanie i odczytywanie binarne
--zrobic w ten sposob ngramy--- 
---zapisywanie wygenerowanego tekstu do pliku i/lub wypluwanie na ekran
 

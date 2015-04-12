@@ -31,7 +31,7 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 		
 		if(theSame == 1){ //jezeli po przejsciu przez poprzednia petle theSame nadal jest rowne 1 to znaczy ze znaleziono odpowiedni
 			found = 1;
-			printf("Ostatnia porownywana cyfra to: %d =?= %d\n",soughtNgram[3], ngramArray[0].ngram[3] );
+			printf("Ostatnia porownywana cyfra to: %d =?= %d",soughtNgram[3], ngramArray[0].ngram[3] );
 			return i;	
 		}
 		else	i++;
