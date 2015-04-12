@@ -6,9 +6,22 @@
 #include "ngramArray.h"
 #include "wordArray.h"
 
+/*
+bierze: slowo do dodania, index poprzedniego ngramu, wskaznik na tablice ngramow, aktualna pozycje w ngramie, 
+robi: dodaje nowy ngram/ dodaje wystapienie do istniejacego ngramu
+zwraca: 
+*/
+int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd, int lastNgram){
+	if(lastNgram!=(-1)){
+		//tylko tworzymy ngram
+	} 
+	else{
+		//tworzymy ngram
+		//dodajemy do nextow poprzedniego
+	}
+	//zwracamy index dodanego/uzytego ngramu 
 
-
-
+}
 
 
 int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram){ //tablica intow jako ostatni argument jest specjalnie- patrz struktura
@@ -31,7 +44,6 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 		
 		if(theSame == 1){ //jezeli po przejsciu przez poprzednia petle theSame nadal jest rowne 1 to znaczy ze znaleziono odpowiedni
 			found = 1;
-			printf("Ostatnia porownywana cyfra to: %d =?= %d\n",soughtNgram[3], ngramArray[0].ngram[3] );
 			return i;	
 		}
 		else	i++;
@@ -41,43 +53,6 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 }
 
 
-
-
-
-
-
-
-
-/*int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram){ //tablica intow jako ostatni argument jest specjalnie- patrz struktura
-	//zwraca index z tablicy ngramow lub (-1) jezeli nie znalazl niczego
-	printf("szukam ngramu\n");
-	int i = 0;
-	int j;
-	int sought =(-1);
-	int equal;
-	
-	while((i<arraySize)&&(sought==-1)){
-		printf("spelnione warunki\n");
-		ngram_t newNgram=ngramArray[i];
-		equal=1;	//zmienna sluzy do sprawdzenia czy wszystkie przeiterowane indexy sa rowne- domyslnie jeden, 
-		for (j=0;j<ngramLevel;j++){
-			if(newNgram.ngram[j]!=soughtNgram[j])
-				equal=0;
-								//jak ktorykolwiek jest rozny, zmieniamy na zero
-		}
-		if(equal==1){
-		printf("porownuje takie tablice: ngramArray: %d-%d-%d-%d \n",newNgram.ngram[0],newNgram.ngram[1],newNgram.ngram[2],newNgram.ngram[3]);
-		printf("oraz: soughtNgram: %d-%d-%d-%d \n", soughtNgram[0],soughtNgram[1],soughtNgram[2],soughtNgram[3]);
-		 sought = i;
-		} 					//jezeli wytrwalo 1 to znaczy ze caly ngram jest taki sam
-		i++;
-	}
-	
-	return(sought);						//zwracamy index z ngram Array
-		
-}
-
-*/
 int findNext(ngram_t ngramElem, int nextNgramIndex){
 	int i;
 	int foundNext = -1;
@@ -90,4 +65,100 @@ int findNext(ngram_t ngramElem, int nextNgramIndex){
 	return(foundNext);
 }
 
+/*
+if(wordsInText == ngramLevel){
+				for(j=0;j<ngramLevel;j++){		//dla takiej liczby slow w pliku = ngramLevel					
+					fscanf(textFile,"%s",buffer);		//wczytaj do stringa slowo
+					newNgram.ngram[j] = findWord(wordArray, wordArraySize, buffer); //sprawdzajac i zapisujac po koleii indexy z wordArray
+				}
+				foundPosition=findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newNgram.ngram);
+				if(foundPosition==(-1)){					
+					newNgram.numberOfOccurences=1;
+					newNgram.nextNumber = 0;
+					ngramArray[currentNgramArrayPosition] = newNgram;
+					currentNgramArrayPosition++;
+				}	
+				else
+					ngramArray[foundPosition].numberOfOccurences++; 	
+			}
+			//TODO Dodac do funkcji addNgram opcje dodawania bez wiazania - z jakims indeksem poprzedniego -1 czy cos
+			else	{			//wiemy ze liczba slow w pliku jest wieksza od rzedu ngramu
+				//znajdujemy sie teraz na poczatku pliku- inicjujemy tworzac pierwszy ngram
+				
+				for(j=0;j<ngramLevel;j++){					
+					fscanf(textFile,"%s",buffer);		//czytanie slowa z pliku			
+					temp = findWord(wordArray, wordArraySize, buffer);
+					tempWordIndexArray[j] = temp;		//findWord(wordArray, wordArraySize, buffer);//sprawdzenie indexu slowa  z tablicy slow
+					printf("przeczytalem slowo %d \n",temp);
+				}
+				printf("bede szukal takiej tablicy %d-%d-%d-%d \n",tempWordIndexArray[0],tempWordIndexArray[1],tempWordIndexArray[2],tempWordIndexArray[3]);
+				foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempWordIndexArray);
+				printf("pozycja ngramu to :%d\n",foundPosition);
+						if(foundPosition==(-1)){
+							newNgram.ngram=tempWordIndexArray;		//twrzorzymy nowy ngram
+							newNgram.numberOfOccurences=1;
+							newNgram.nextNumber = 0;
+							ngramArray[currentNgramArrayPosition] = newNgram;
+							//printf("newNgram.ngram to :%d-%d-%d\n",ngramArray[currentNgramArrayPosition].ngram[0],ngramArray[currentNgramArrayPosition].ngram[1],ngramArray[currentNgramArrayPosition].ngram[2]);
+								
+							lastNgramIndex=currentNgramArrayPosition;
+							currentNgramArrayPosition++;
+																			
+						}	
+						else{
+							ngramArray[foundPosition].numberOfOccurences++; 
+							lastNgramIndex=foundPosition;
+						}
+						//newtempWordIndexArray[0] = tempWordIndexArray[0];
+					
+				for(k=0;k<(ngramLevel);k++){		//kopiuje tablice do nowej zminnej bo tamta cos chrzniola --- zagadka wszechczasow
+							newtempWordIndexArray[k]=tempWordIndexArray[k];
+					}
+				for(j=1;j<(wordsInText-ngramLevel);j++){
+						for(k=0;k<(ngramLevel-1);k++){		//przesuniecie tablicy o jeden w lewo -> prawy brzeg "wolny"
+							newtempWordIndexArray[k]=newtempWordIndexArray[k+1];
+						}
+						
+						fscanf(textFile,"%s",buffer);	
+						newtempWordIndexArray[ngramLevel-1] = findWord(wordArray, wordArraySize, buffer);//ostatni element uzupelniamy nowym slowem(jego indexem)
+						printf("Doczytalem do tablicy slowo %d \n",newtempWordIndexArray[ngramLevel-1]);
+						printf("Teraz tablica wyglada nastepujaca %d-%d-%d-%d \n",newtempWordIndexArray[ngramLevel-4],newtempWordIndexArray[ngramLevel-3],newtempWordIndexArray[ngramLevel-2],newtempWordIndexArray[ngramLevel-1]);
+						foundPosition = findNgram(ngramArray, currentNgramArrayPosition, ngramLevel, newtempWordIndexArray);//TODO sprawdzic czy to szukanie nie wchodzi na pamiec currentngramPosition!!!
+						printf("znaleziona pozycja to: %d\n",foundPosition);
+						
+						if(foundPosition==(-1)){
+						
+							newNgram.ngram = newtempWordIndexArray;		//twrzorzymy nowy ngram
+							newNgram.numberOfOccurences = 1;
+							newNgram.nextNumber = 0;
+							ngramArray[currentNgramArrayPosition] = newNgram;
+														//tu jest miejsce gdzie zaczynamy linkowac poprzedniego ngram do aktualnego
+								foundNext=findNext(ngramArray[lastNgramIndex],currentNgramArrayPosition);
+								printf("1\n");
+								if(foundNext==-1){	
+														//wypadek gdy nie wystapilo jeszcze takie przejscie
+									ngramArray[lastNgramIndex].nextNumber++;
+									
+									int nextSize = ngramArray[lastNgramIndex].nextNumber;
+									printf("rozmiar nexta = %d\n",nextSize);
+					
+									ngramArray[lastNgramIndex].nextArray[nextSize].nextNgram = currentNgramArrayPosition;
+									printf("2\n");
+								}
+								else ngramArray[lastNgramIndex].nextArray[foundNext].numberOfCollocations++;		//gdy takie przejscie juz nastapilo
+								// ngramArray[lastNgramIndex].nextArray[]; -chyba niepotrzebne ale boje sie wyrzucac
+							lastNgramIndex=currentNgramArrayPosition;
+							currentNgramArrayPosition++;
+							printf("Jestem tutaj i dodaje collocation w ngramie nr %d przejscie nr %d\n",lastNgramIndex,foundNext);
+							
+						}	
+						else{
+							ngramArray[foundPosition].numberOfOccurences++; 
+							lastNgramIndex=foundPosition;
+							printf("Dodalem occurence do ngramu nr: %d\n",foundPosition);
+						}
+				}
+	
+			}
+			*/
 
