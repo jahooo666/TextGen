@@ -27,7 +27,7 @@ int main(int argc, char **argv){
 		printf("Liczba nowych slow z maina to : %d\n",newWordNumber);
 		if(wordNumber > 0){
 			int error = printWordArray(wordArray, newWordNumber);
-			ngramArray = malloc((newWordNumber-attributes.ngramLevel)*(sizeof(ngram_t)));
+			ngramArray = (ngram_t *)malloc((newWordNumber-attributes.ngramLevel)*(sizeof(ngram_t)));
 			int errora = readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, ngramArray, attributes.ngramLevel, wordArray, wordNumber);
 			printf("tyle jest ngramow: %d\n",errora);
 		
