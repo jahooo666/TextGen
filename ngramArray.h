@@ -14,7 +14,7 @@ typedef struct {
 	int *ngram;//tablica indexow z tablicy slow
 	int numberOfOccurences;
 	double pmi;
-	next_t nextArray[100];
+	next_t nextArray[100];	// docelowo tu ma byc *
 	int nextNumber;
 }ngram_t;
 

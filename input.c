@@ -60,27 +60,41 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 
 int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArray, int ngramLevel, word_t *wordArray, int wordArraySize){
 	
-	int i,j,k;
-	int currentNgramArrayPosition = 0; 
-	int first,last; 				//indexy do przechodzenia po tablicy 
+	int i,j,k;					
 	char buffer[255];
 	FILE *textFile;
-	ngram_t newNgram;
-	
-	int foundPosition;
-	int foundNext;
+		
 	int lastNgramIndex; //<- index ostatnio uzywanego ngramu uzywany do laczenia ngramow
-	int wordsInText;
-	int temp;
-	int tempWordIndexArray[ngramLevel];
+	int currentNgramArrayPosition = 0; // <- index aktualnego konca danych w tablicy ngramow
+	int tempIndArray[ngramLevel];
 	int newtempWordIndexArray[ngramLevel];
 	for(i=0; i<fileNumber; i++){
-		wordsInText = countWordsInText(fileName[i]);		
-		if( wordsInText >= ngramLevel ){		
+		if( countWordsInText(fileName[i]) >= ngramLevel ){		
 			FILE *textFile = fopen(fileName[i],"r");
-			
-			
+				for(j=0;j<ngramLevel;j++){
+					fscanf(textFile,"%s",buffer);
+					tempIndArray[j] = findWord(wordArray, wordArraySize, buffer);					
+				}	
+				lastNgramIndex = addNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempIndArray, -1);	//dodajemy pierwszy ngram z pliku - nie bedzie on linkowany
+				if (lastNgramIndex>=currentNgramArrayPosition)//TODO sprawdzic czy nie powinno byc >=  to ogolnie sprawdza czy zostal dodany nowy ngram czy tylko wystapienie starego
+					currentNgramArrayPosition++;		// jezeli zostal dodany nowy to zwiekszamy pozycje w tablicy	
+				while(fscanf(textFile,"%s",buffer)!=EOF){	//wczytujemy po jednym slowie;
+					for(j=0;j<(ngramLevel-1);j++){
+						tempIndArray[j]=tempIndArray[j+1];
+					}
+					tempIndArray[ngramLevel-1] = findWord(wordArray, wordArraySize, buffer); // dodajemy ostatnie slowo ngramu
+					printf("Bede dodawal nowy ngram %d,%d, %d, %d\n",tempIndArray[0],tempIndArray[1],tempIndArray[2],tempIndArray[3]);
+					lastNgramIndex = addNgram(ngramArray, currentNgramArrayPosition, ngramLevel, tempIndArray, lastNgramIndex);
+					
+					if (lastNgramIndex>=currentNgramArrayPosition)//TODO sprawdzic czy nie powinno byc >=  to ogolnie sprawdza czy zostal dodany nowy ngram czy tylko wystapienie starego
+						currentNgramArrayPosition++;		// jezeli zostal dodany nowy to zwiekszamy pozycje w tablicy
+					
+				}
+							
 			fclose(textFile);
+		
+		
+		
 		}
 		else printf("Plik %s ma za malo slow- nie jest brany pod uwage przy tworzeniu ngramow",fileName[i]);	
 	

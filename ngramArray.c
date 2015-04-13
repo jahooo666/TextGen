@@ -12,15 +12,50 @@ robi: dodaje nowy ngram/ dodaje wystapienie do istniejacego ngramu
 zwraca: 
 */
 int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd, int lastNgram){
-	if(lastNgram!=(-1)){
-		//tylko tworzymy ngram
+	ngram_t newNgram;
+	int foundNgram;
+	printf("dodaje nowy ngram %d,%d, %d, %d\n",ngramToAdd[0],ngramToAdd[1],ngramToAdd[2],ngramToAdd[3]);
+	if(lastNgram==(-1)){
+		printf("1-");
+		//dodawanie ngramu bez linkowania -- to znaczy ze jest to pierwsze slowo tekstow/pliku - zobaczymy jak to bedzie rozwiazane
+		foundNgram = findNgram(ngramArray, arraySize, ngramLevel, ngramToAdd);
+		//szuka ngramu w tablicy ngramow
+		printf("znaleziony ngram %d\n", foundNgram);
+		if(foundNgram==(-1)){		//nie znalezlismy wiec tworzymym nowy
+			newNgram.ngram = ngramToAdd;
+			newNgram.numberOfOccurences = 1;
+			newNgram.nextNumber = 0;
+			ngramArray[arraySize] = newNgram;
+			// w razie dalszych problemow z nextami tutaj mozna sprobowac zaalokowac pamiec na tablice nextow
+			//printf("dodaje nowy ngram %d,%d, %d, %d\n",newNgram.ngram[0],newNgram.ngram[1],newNgram.ngram[2],newNgram.ngram[3]);
+			return (arraySize+1);
+		}	
+		else{						//znalezlismy go juz w tablicy wiec dodajemy mu tylko wystapienie.
+			ngramArray[foundNgram].numberOfOccurences++;
+			return (foundNgram);			
+		}		 	
 	} 
-	else{
-		//tworzymy ngram
-		//dodajemy do nextow poprzedniego
-	}
-	//zwracamy index dodanego/uzytego ngramu 
-
+	else{			//dodawanie ngramu wraz z linkowaniem
+		printf("2-");
+		foundNgram = findNgram(ngramArray, arraySize, ngramLevel, ngramToAdd);
+		printf("znaleziony ngram %d\n", foundNgram);
+		printf("dodaje nowy ngram %d,%d, %d, %d\n",ngramToAdd[0],ngramToAdd[1],ngramToAdd[2],ngramToAdd[3]);
+		if (foundNgram==(-1)){// takiego ngramu jeszcze nie bylo dodajemy go i linkujemy do poprzedniego
+			newNgram.ngram = ngramToAdd;
+			newNgram.numberOfOccurences = 1;
+			newNgram.nextNumber = 0;
+			ngramArray[arraySize] = newNgram;
+			// w razie dalszych problemow z nextami tutaj mozna sprobowac zaalokowac pamiec na tablice nextow
+			//linkowanie
+			printf("dodaje nowy ngram %d,%d, %d, %d\n",newNgram.ngram[0],newNgram.ngram[1],newNgram.ngram[2],newNgram.ngram[3]);
+			return (arraySize+1);
+		}
+		else{// taki ngram juz byl wiec dodajemy mu occurence i linkujemy do poprzedniego
+			ngramArray[foundNgram].numberOfOccurences++;
+			//linkowanie
+			return (foundNgram);	
+		}		
+	}	
 }
 
 
