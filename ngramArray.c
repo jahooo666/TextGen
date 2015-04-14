@@ -20,7 +20,7 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 	int theSame = 1;	//w kazdym ngramie ta zmienna jest od nowa ustalana na true i gdy wystapi pierwsza niezgodnosc to staje sie 0
 	int found = 0; 	//zmienna mowiaca czy juz znalezlismy odpowiedni ngram
 	
-	
+	/*
 	while((i<arraySize)&&(found!=1)){
 	printf("ostatnia liczba to: %d\n",ngramArray[1].ngram[0]);
 		theSame = 1;
@@ -35,19 +35,19 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 			}
 				
 		}
-		/*
-		for(j=0;j<ngramLevel;j++){
-			if((ngramArray[i].ngram[j])!=(soughtNgram[j]))
-				theSame=0;
-		}
-		*/
+		
+		//for(j=0;j<ngramLevel;j++){
+		//	if((ngramArray[i].ngram[j])!=(soughtNgram[j]))
+		//		theSame=0;
+		//}
+		
 		if(theSame == 1){ //jezeli po przejsciu przez poprzednia petle theSame nadal jest rowne 1 to znaczy ze znaleziono odpowiedni
 			found = 1;
 			return i;
 				
 		}
 		else	i++;
-	}
+	}*/
 	return -1;	
 
 }
@@ -56,17 +56,18 @@ int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgr
 
 
 int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd, int lastNgram){
-	ngram_t newNgram;
 	int foundNgram;
 	printf("addNgram: %d,%d, %d, %d\n",ngramToAdd[0],ngramToAdd[1],ngramToAdd[2],ngramToAdd[3]);
 	if(lastNgram==(-1)){
 		printf("\tjest pierwszy\n");
 		//dodawanie ngramu bez linkowania -- to znaczy ze jest to pierwsze slowo tekstow/pliku - zobaczymy jak to bedzie rozwiazane
+		
 		foundNgram = findNgram(ngramArray, arraySize, ngramLevel, ngramToAdd);
 		//szuka ngramu w tablicy ngramow
 		printf("pozycja znalezionego ngram %d\n", foundNgram);
 		//printf("%d,%d,%d,%d",ngramArray[foundNgram].ngram[0],ngramArray[foundNgram].ngram[1],ngramArray[foundNgram].ngram[2],ngramArray[foundNgram].ngram[3]);
 		if(foundNgram==(-1)){		//nie znalezlismy wiec tworzymym nowy			
+			ngramArray[arraySize] = malloc(sizeof *ngramArray[arraySize]);
 			ngramArray[arraySize].ngram = (int *)calloc(ngramLevel,sizeof(int));
 			ngramArray[arraySize].numberOfOccurences = 1;
 			ngramArray[arraySize].nextNumber = 0;
@@ -82,9 +83,11 @@ int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd
 	} 
 	else{			//dodawanie ngramu wraz z linkowaniem
 		printf("\tjest kolejny\n");
+		printf("ngramArray[0].ngram[0] przed szukaniem: %d\n",ngramArray[0].ngram[0]);
 		foundNgram = findNgram(ngramArray, arraySize, ngramLevel, ngramToAdd);
+		printf("ngramArray[0].ngram[0] po szukaniu:  %d\n",ngramArray[0].ngram[0]);
 		printf("pozycja znalezionego ngramu %d\n", foundNgram);
-		printf("znaleziony ngram to: %d,%d, %d, %d\n",ngramArray[foundNgram].ngram[0],ngramArray[foundNgram].ngram[1],ngramArray[foundNgram].ngram[2],ngramArray[foundNgram].ngram[3]);
+		//printf("znaleziony ngram to: %d,%d, %d, %d\n",ngramArray[foundNgram].ngram[0],ngramArray[foundNgram].ngram[1],ngramArray[foundNgram].ngram[2],ngramArray[foundNgram].ngram[3]);
 		if (foundNgram==(-1)){// takiego ngramu jeszcze nie bylo dodajemy go i linkujemy do poprzedniego
 			ngramArray[arraySize].ngram = (int *)calloc(ngramLevel,sizeof(int));
 			ngramArray[arraySize].numberOfOccurences = 1;
@@ -92,7 +95,7 @@ int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd
 			ngramArray[arraySize].ngram = ngramToAdd;
 			// w razie dalszych problemow z nextami tutaj mozna sprobowac zaalokowac pamiec na tablice nextow
 			//linkowanie
-			printf("dodalem kolejny ngram %d,%d, %d, %d\n",newNgram.ngram[0],newNgram.ngram[1],newNgram.ngram[2],newNgram.ngram[3]);
+			printf("dodalem kolejny ngram %d,%d, %d, %d\n",ngramArray[arraySize].ngram[0],ngramArray[arraySize].ngram[1],ngramArray[arraySize].ngram[2],ngramArray[arraySize].ngram[3]);
 			return (arraySize+1);
 		}
 		else{// taki ngram juz byl wiec dodajemy mu occurence i linkujemy do poprzedniego
