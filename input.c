@@ -64,13 +64,15 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, ngramArray_t *ngra
 	
 	for(i=0; i<(ngramArray->ngramLevel); i++)
 		newNgram[i] = i;
-	addNgram(&(*ngramArray), newNgram, 0);
+	addNgram(ngramArray, newNgram, 0);
+	
 	for(i=0; i<(ngramArray->ngramLevel); i++)
 		newNgram[i] = 2*i;
-	addNgram(&(*ngramArray), newNgram, 0);
+	addNgram(ngramArray, newNgram, 0);
+	
 	for(i=0; i<(ngramArray->ngramLevel); i++)
 		newNgram[i] = 3*i;
-	addNgram(&(*ngramArray), newNgram, 0);
+	addNgram(ngramArray, newNgram, 0);
 	
 	printf("Dodalem %d ngramow sa nimi: %d, %d, %d \n",ngramArray->number, 
 											ngramArray->tabwsk[0]->ngram[1], 
