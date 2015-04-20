@@ -4,11 +4,12 @@
 #include <stdio.h>
 
 
+
+
 typedef struct {
 	int nextNgram;			//index z tablicy ngramow
 	int numberOfCollocations;//ile razy ten zwiazek sie powtorzyl
 }next_t;
-
 
 typedef struct {
 	int *ngram;//tablica indexow z tablicy slow
@@ -18,10 +19,18 @@ typedef struct {
 	int nextNumber;
 }ngram_t;
 
+typedef struct{
+	int number;
+	int ngramLevel;
+	ngram_t **tabwsk;
+}ngramArray_t;
+
+
+
 
 
 int findNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *soughtNgram); //tablica intow jako ostatni argument jest specjalnie- patrz struktura. zwraca inta- index w tablicy ngramow
 int findNext(ngram_t ngramElem, int nextNgramIndex); // jw
-int addNgram(ngram_t *ngramArray, int arraySize, int ngramLevel, int *ngramToAdd, int lastNgram);
+int addNgram(ngramArray_t *ngramArray, int *ngramToAdd, int lastNgram);
 
 #endif

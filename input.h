@@ -11,7 +11,8 @@
 int countWordsInText( char *fileName);
 int countWordsInTextFiles( char **fileName,int fileNumber);
 int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray);
-int readNgramsFromTextFiles( char **fileName, int fileNumber, ngram_t *ngramArray, int ngramLevel, word_t *wordArray, int wordArraySize);
+int readNgramsFromTextFiles( char **fileName, int fileNumber, ngramArray_t *ngramArray, word_t *wordArray, int wordArraySize);
+					 							
 //ngramElem *readDataFromBaseFile( char *fileName);
 
 #endif

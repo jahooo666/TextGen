@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 word_t *wordArray;
-ngram_t *ngramArray;
+
 int rng; 
 
 
@@ -27,9 +27,13 @@ int main(int argc, char **argv){
 		printf("Liczba nowych slow z maina to : %d\n",newWordNumber);
 		if(wordNumber > 0){
 			int error = printWordArray(wordArray, newWordNumber);
-			ngramArray = (ngram_t *)malloc((newWordNumber-attributes.ngramLevel) * sizeof *ngramArray);
-			int errora = readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, ngramArray, attributes.ngramLevel, wordArray, wordNumber);
-			printf("tyle jest ngramow: %d\n",errora);
+			//zakladanie struktury ngramow
+			ngramArray_t ngramArray;
+			ngramArray.tabwsk = (ngram_t **)malloc(newWordNumber*sizeof(ngram_t *)); //prawie na pewno dobrze zrobiony malloc tabliocy wskaznikow na ngramy
+			ngramArray.ngramLevel = attributes.ngramLevel;
+			ngramArray.number = 0;		
+			int readNgramsResult = readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, &ngramArray, wordArray, newWordNumber);
+			printf("tyle jest ngramow: %d\n",readNgramsResult);
 		
 		
 		
