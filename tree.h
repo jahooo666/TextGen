@@ -3,7 +3,8 @@
 #include <stdio.h>
 
 typedef struct tree_el{
-	 int val;
+	 char* val;
+	 int number; 
 	 struct tree_el * right, * left;
 }node;
 
