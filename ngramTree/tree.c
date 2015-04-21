@@ -54,12 +54,13 @@ node* search(node **tree, char** valu,  int rng){
 
 
 
-void printout(node * tree, int rng){
+void printout(node * tree, int rng, int lvl){
 	int i;
-	if(tree->left) printout(tree->left,rng);
+	if(tree->left) printout(tree->left,rng,lvl+1);
+	for(i=0;i<lvl;i++)printf("\t");
 	for(i=0; i<rng; i++)printf("%s-\t",tree->wArray[i]);
-	printf("\n");
-	if(tree->right) printout(tree->right,rng);
+	printf("--%d\n",tree->noO);
+	if(tree->right) printout(tree->right,rng,lvl+1);
 }
 
 

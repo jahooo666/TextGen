@@ -30,21 +30,15 @@ int main(int argc, char **argv){
 	
 	for(i=0;i<rng;i++){
 		waArray[i]=(char *)malloc(100*sizeof(char));
-		sprintf(waArray[i],"jlgsheuoa bla %d",i);
+		sprintf(waArray[i],"sheuoa bla %d",i);
 	}
 	
 	add(&root, waArray,rng);
 		
-	/*for(i=1; i<=10; i++){
-		char *string = (char *)malloc(30*sizeof(char));
-		sprintf(string ,"numer %d",rand()%1000);
-		add(&root, string);
-	}*/
-
-	
-	//node *found = search(&root, "numer 192");
-	//found->number++; 
-	//printf("left to: %s\n",(found->right)->val);
+		
+	node *found = search(&root, wArray,rng);
+	found->noO++; 
+	printf("left to: %s\n",(found->left)->wArray[0]);
 	//node *found2 = found->right;
 	
 		
@@ -52,7 +46,7 @@ int main(int argc, char **argv){
 	//found->left->number+=2;
 	//found->right->number--;
 	//TODZIALA!!!!
-	printout(root, rng);
+	printout(root, rng, 0);
 	
 	
 }
