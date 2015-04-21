@@ -1,6 +1,6 @@
 #include "input.h"
 //#include "output.h"
-#include "ngramArray.h"
+#include "./ngramTree/tree.h"
 #include "wordArray.h"
 #include "attributes.h"
 #include <stdio.h>
@@ -26,14 +26,7 @@ int main(int argc, char **argv){
 		int newWordNumber=readWordsFromTextFiles( attributes.inFile,attributes.inFileNumber+1, wordArray);
 		printf("Liczba nowych slow z maina to : %d\n",newWordNumber);
 		if(wordNumber > 0){
-			//int error = printWordArray(wordArray, newWordNumber);
-			//zakladanie struktury ngramow
-			ngramArray_t ngramArray;
-			ngramArray.tabwsk = (ngram_t **)malloc(newWordNumber*sizeof(ngram_t *)); //prawie na pewno dobrze zrobiony malloc tabliocy wskaznikow na ngramy
-			ngramArray.ngramLevel = attributes.ngramLevel;
-			ngramArray.number = 0;		
-			int readNgramsResult = readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, &ngramArray, wordArray, newWordNumber);
-			printf("tyle jest ngramow: %d\n",readNgramsResult);
+		
 		
 		
 		

@@ -4,7 +4,7 @@
 
 #include "input.h"
 #include "wordArray.h"
-#include "ngramArray.h"
+#include "./ngramTree/tree.h"
 
 int countWordsInText( char *fileName){
 	FILE *textFile;
@@ -58,27 +58,9 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 	
 }
 
-int readNgramsFromTextFiles( char **fileName, int fileNumber, ngramArray_t *ngramArray, word_t *wordArray, int wordArraySize){
-	int newNgram[4];
-	int i;
+int readNgramsFromTextFiles( char **fileName, int fileNumber,  node root, word_t *wordArray, int wordArraySize){
 	
-	for(i=0; i<(ngramArray->ngramLevel); i++)
-		newNgram[i] = i;
-	addNgram(ngramArray, newNgram, 0);
 	
-	for(i=0; i<(ngramArray->ngramLevel); i++)
-		newNgram[i] = 2*i;
-	addNgram(ngramArray, newNgram, 0);
-	
-	for(i=0; i<(ngramArray->ngramLevel); i++)
-		newNgram[i] = 3*i;
-	addNgram(ngramArray, newNgram, 0);
-	
-	printf("Dodalem %d ngramow sa nimi: %d, %d, %d \n",ngramArray->number, 
-											ngramArray->tabwsk[0]->ngram[1], 
-											ngramArray->tabwsk[1]->ngram[1],
-											ngramArray->tabwsk[2]->ngram[1]  );
-	//przechodzenie przez wszystkie pliki i po koleii dodawanie do tablicy ngramow
 };
 
 	
