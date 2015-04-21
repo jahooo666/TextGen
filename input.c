@@ -58,8 +58,32 @@ int readWordsFromTextFiles( char **fileName, int fileNumber, word_t *wordArray){
 	
 }
 
-int readNgramsFromTextFiles( char **fileName, int fileNumber,  node root, word_t *wordArray, int wordArraySize){
+int readNgramsFromTextFiles( char **fileName, int fileNumber, node **root, int rng){
+	int i,f;
+	char **wArray=(char **)malloc(rng*sizeof(char *));
+	char *buffer = (char *)malloc(100*sizeof(char));
+	//char bufer[255];	
 	
+	for(f=0;f<fileNumber;f++){
+		//teraz wczytam pierwsze rng ngramow do tablicy bufforowej i postaram sie ja wrzucic do drzewa
+		FILE *textFile = fopen(fileName[f],"r");
+		i=0;
+		
+		while((fscanf(textFile,"%s",buffer)!= EOF)&&(i<rng)){
+			wArray[i]=(char *)malloc(100*sizeof(char));
+			strcpy(wArray[i],buffer);			
+			i++;
+		}	
+			add(&(*root), wArray ,rng);
+		while(fscanf(textFile,"%s",buffer)!= EOF){
+			for(i=0;i<(rng-1);i++){
+				strcpy(wArray[i],wArray[i+1]);
+			}
+			strcpy(wArray[rng-1],buffer);
+				
+			add(root, wArray ,rng);		
+		}
+	}
 	
 };
 

@@ -27,19 +27,28 @@ void insert(node ** tree, node * item,int rng){
 }
 
 void add(node **tree, char** valu, int rng){
-	int i;
-	node * curr;
-	curr = (node *)malloc(sizeof(node));
-	curr->left = curr->right = NULL;
-	curr->wArray = (char **)malloc(rng*sizeof(char*));
-	for(i=0; i<rng; i++) curr->wArray[i] = (char *)malloc(100*sizeof(char));
-	curr->noO = 1;
-	(curr->wArray) = valu;
-	insert(&(*tree),curr,rng);
+	node *found = search(tree, valu, rng);
+	if(found!=NULL){		//gdy taki ngram byl juz w drzewie
+		found->noO++;
+	}else{				//gdy takiego ngramu jeszcze nie bylo w drzewie
+		int i;
+		node * curr;
+		curr = (node *)malloc(sizeof(node));
+		curr->left = curr->right = NULL;
+		curr->wArray = (char **)malloc(rng*sizeof(char*));
+		for(i=0; i<rng; i++){
+			 curr->wArray[i] = (char *)malloc(100*sizeof(char));
+			 strcpy(curr->wArray[i],valu[i]);
+		}
+		curr->noO = 1;
+		
+		//(curr->wArray) = *valu;
+		insert(&(*tree),curr,rng);
+	}
 }
 
-node* search(node **tree, char** valu,  int rng){
-	if(!(*tree)){
+node* search(node **tree, char** valu,  int rng){	
+	if(!(*tree)){		
 		return NULL;
 	}
 	int wynik = ngrcmp(valu,(*tree)->wArray,rng);
@@ -54,10 +63,11 @@ node* search(node **tree, char** valu,  int rng){
 
 
 
-void printout(node * tree, int rng, int lvl){
+void printout(node * tree, int rng, int lvl){	
+// od ktorego wezla ma zaczac drukowac - rzad ngramow - poziom drukowania - zeby wygladalo jak drzewo 	
 	int i;
 	if(tree->left) printout(tree->left,rng,lvl+1);
-	for(i=0;i<lvl;i++)printf("\t");
+	for(i=0;i<lvl;i++)printf(" ");
 	for(i=0; i<rng; i++)printf("%s-\t",tree->wArray[i]);
 	printf("--%d\n",tree->noO);
 	if(tree->right) printout(tree->right,rng,lvl+1);

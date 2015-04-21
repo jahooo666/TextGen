@@ -22,4 +22,5 @@ void printout(node * tree, int rng, int lvl);
 void add(node **tree, char** valu, int rng);
 int ngrcmp(char **a,char **b, int size);
 node* search(node **tree, char** valu, int rng);
+
 #endif
