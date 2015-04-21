@@ -10,4 +10,6 @@ typedef struct tree_el{
 
 void insert(node ** tree, node * item);
 void printout(node * tree);
+void add(node **tree, char* valu);
+node* search(node **tree, char* valu);
 #endif

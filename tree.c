@@ -34,12 +34,13 @@ void add(node **tree, char* valu){
 	curr = (node *)malloc(sizeof(node));
 	curr->left = curr->right = NULL;
 	curr->val = malloc(30*sizeof(char));
+	curr->number = 0;
 	(curr->val)=valu;
 	insert(&(*tree),curr);
 }
 
 void printout(node * tree){
 	if(tree->left) printout(tree->left);
-	printf("%s\n",tree->val);
+	printf("%s\t%d\n",tree->val,tree->number);
 	if(tree->right) printout(tree->right);
 }

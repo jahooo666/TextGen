@@ -21,6 +21,9 @@ int main(int argc, char **argv){
 	add(&root, "Okurwa");
 	add(&root, "numer 192");
 	
+	node *found = search(&root, "Okurwa");
+	found->number++; 
+	//TODZIALA!!!!
 	printout(root);
 	
 	
