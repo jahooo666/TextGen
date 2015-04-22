@@ -15,10 +15,10 @@ int ngrcmp(char **a,char **b,int size){	// do porownywania tablic stringow
 }
 
 
-void insert(node ** tree, node * item,int rng){
+node* insert(node ** tree, node * item, int rng){
 	if(!(*tree)){
 		*tree = item;
-		return;
+		return *tree;
 	}
 	if(ngrcmp((item->wArray),((*tree)->wArray),rng)<0)
 		insert(&(*tree)->left, item,rng);
@@ -26,26 +26,37 @@ void insert(node ** tree, node * item,int rng){
 		insert(&(*tree)->right, item,rng);
 }
 
-void add(node **tree, char** valu, int rng){
+
+node* add(node **tree, char** valu, int rng, node *last){
 	node *found = search(tree, valu, rng);
 	if(found!=NULL){		//gdy taki ngram byl juz w drzewie
 		found->noO++;
+		//dodaawanie przejscia z poprzedniego
+		return(found);
 	}else{				//gdy takiego ngramu jeszcze nie bylo w drzewie
 		int i;
 		node * curr;
 		curr = (node *)malloc(sizeof(node));
 		curr->left = curr->right = NULL;
 		curr->wArray = (char **)malloc(rng*sizeof(char*));
+		curr->nextArray = (struct next_t *)malloc(100*sizeof(next_t));
+		curr->nextNumber = 0;
 		for(i=0; i<rng; i++){
 			 curr->wArray[i] = (char *)malloc(100*sizeof(char));
 			 strcpy(curr->wArray[i],valu[i]);
 		}
-		curr->noO = 1;
-		
+		curr->noO = 1;			
 		//(curr->wArray) = *valu;
-		insert(&(*tree),curr,rng);
+		node *currPtr = insert(&(*tree),curr,rng);
+		if(last!=NULL){
+			int nextNumb=last->nextNumber;
+			printf("jestem %s a moj last to: %s\n",curr->wArray[0],last->wArray[0]);
+			//((last)->nextArray[nextNumb]) = currPtr;
+		}
+		return currPtr;
 	}
 }
+
 
 node* search(node **tree, char** valu,  int rng){	
 	if(!(*tree)){		

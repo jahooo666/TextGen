@@ -11,16 +11,17 @@ typedef struct tree_el{
 	 char** wArray;
 	 int noO; 	//number of Occurences
 	 int PMI;
+	 int nextNumber;
 	 struct next_t* nextArray;
 	 struct tree_el * right, * left; //to do drzewa
 	 
+	 
 }node;
 
-
-void insert(node ** tree, node * item, int rng);
-void printout(node * tree, int rng, int lvl);
-void add(node **tree, char** valu, int rng);
 int ngrcmp(char **a,char **b, int size);
 node* search(node **tree, char** valu, int rng);
+node* insert(node ** tree, node * item, int rng);
+node* add(node **tree, char** valu, int rng, node *last);
+void printout(node * tree, int rng, int lvl);
 
 #endif

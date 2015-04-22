@@ -62,6 +62,8 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, node **root, int r
 	int i,f;
 	char **wArray=(char **)malloc(rng*sizeof(char *));
 	char *buffer = (char *)malloc(100*sizeof(char));
+	node *last;
+	
 	//char bufer[255];	
 	
 	for(f=0;f<fileNumber;f++){
@@ -74,14 +76,15 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, node **root, int r
 			strcpy(wArray[i],buffer);			
 			i++;
 		}	
-			add(&(*root), wArray ,rng);
+			last = add(&(*root), wArray ,rng, NULL); 	//dodajemy tylko pierwszy ngram
+			
 		while(fscanf(textFile,"%s",buffer)!= EOF){
 			for(i=0;i<(rng-1);i++){
-				strcpy(wArray[i],wArray[i+1]);
+				strcpy(wArray[i],wArray[i+1]);	//przesuwam wszystkie o jeden w lewo
 			}
-			strcpy(wArray[rng-1],buffer);
-				
-			add(root, wArray ,rng);		
+			strcpy(wArray[rng-1],buffer);			//dodaje ostatni element ngramu				
+			last = add(root, wArray ,rng, last);		//dodajemy kazdy ngram po koleii
+			
 		}
 	}
 	
