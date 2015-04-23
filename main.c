@@ -23,15 +23,15 @@ int main(int argc, char **argv){
 		int wordNumber = countWordsInTextFiles( attributes.inFile,attributes.inFileNumber+1);	
 		printf("Liczba slow z maina to : %d\n",wordNumber);
 		wordArray = malloc(wordNumber*(sizeof(word_t)));
-		int newWordNumber=readWordsFromTextFiles( attributes.inFile,attributes.inFileNumber+1, wordArray);
-		printf("Liczba nowych slow z maina to : %d\n",newWordNumber);
+		//int newWordNumber=readWordsFromTextFiles( attributes.inFile,attributes.inFileNumber+1, wordArray);
+		//printf("Liczba nowych slow z maina to : %d\n",newWordNumber);
+		
 		if(wordNumber > 0){
 		node *root; // sadzenie drzewa na ngramy
 		root = NULL;
 		readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, &root, attributes.ngramLevel);		
-		printout(root,attributes.ngramLevel,0);
-		
-		
+		printout(root,attributes.ngramLevel,0);		
+		//gener(root, 2, 15);
 		}
 		else return 0;
 					
