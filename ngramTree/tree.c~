@@ -87,7 +87,7 @@ void printout(node * tree, int rng, int lvl){
 	int i;
 	if(tree->left) printout(tree->left,rng,lvl+1);
 	//if((tree->nextNumber > 1)&&(tree->noO!=tree->nextNumber)){
-		for(i=0;i<lvl;i++)printf("\t");	
+		for(i=0;i<lvl;i++)printf(" ");	
 		for(i=0; i<rng; i++)printf("%s-\t",tree->wArray[i]);
 		printf("--noO=%d--nN=%d\n",tree->noO,tree->nextNumber);
 	//}

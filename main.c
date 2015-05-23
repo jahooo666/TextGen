@@ -31,7 +31,8 @@ int main(int argc, char **argv){
 		root = NULL;
 		readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber+1, &root, attributes.ngramLevel);		
 		printout(root,attributes.ngramLevel,0);		
-		//gener(root, 2, 15);
+		//gener(root, 2, 5);
+		free(root);
 		}
 		else return 0;
 					
