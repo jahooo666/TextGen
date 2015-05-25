@@ -71,7 +71,7 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, node **root, int r
 		FILE *textFile = fopen(fileName[f],"r");
 		i=0;
 		
-		while((fscanf(textFile,"%s",buffer)!= EOF)&&(i<rng)){
+		while((i<rng)&&(fscanf(textFile,"%s",buffer)!= EOF)){
 			wArray[i]=(char *)malloc(100*sizeof(char));
 			strcpy(wArray[i],buffer);			
 			i++;
