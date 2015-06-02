@@ -6,8 +6,9 @@
 #include "./ngramTree/tree.h"
 #include "gener.h"
 
-void gener(node * tree, int rng, int ls){
+void gener(node * origTree, int rng, int ls){
 // ls -liczba slow do wygenerowania
+	node * tree = origTree;
 	srand(time(NULL));
 	int i,j;	
 	int suma;
@@ -18,8 +19,11 @@ void gener(node * tree, int rng, int ls){
 			printf("%s ",tree->wArray[j]);
 	tree = (tree->nextArray)[tree->nextNumber-1].nextEl;
 	
+	
+	
 	//drukowanie pojedynczego(ostatniego) slowa kolejnego ngramu i przesuwanie wskaznika na nastepny element	
-	while((i<ls) && (tree!=NULL)){		
+	while(i<ls){	
+		if (tree==NULL) tree = origTree;	
 		printf("%s ",tree->wArray[rng-1]);
 		//losowanie slowa ktore ma byc nastepne z tablicy nextow
 		suma = 0;
@@ -31,7 +35,7 @@ void gener(node * tree, int rng, int ls){
 			int los=rand()%suma;		
 			//printf("%d -",los);
 			int przedzial = 0;
-			while(los>1){
+			while(los>0){
 				los=los-tree->nextArray[przedzial].noC;
 				przedzial++;
 			}
