@@ -10,13 +10,13 @@ Wiadomosc o niepoprawnych danych- wraz z instrukcja.
 
 int help(){
 	printf("Sposob uzycia: ./TextGen\n");
-		printf("\t [-in = plik wejsciowy]\n");
-		printf("\t [-ngin = plik wejsciowy bazowy]\n");
-		printf("\t [-out = plik wyjsciowy]\n");
-		printf("\t [-ngout = nazwa pliku do ktorego ma byc zapisana baza ]\n");
-		printf("\t [-is = ilosc slow ktore program ma wygenerowac]");
-		printf("\t [-rng = rzad n-gramow na podstawie ktorych ma byc generowany tekst ]");
-		printf("\t [-stat = czy maja byc generowane statystyki slow]");
+		printf("\t -in = plik wejsciowy]\n");
+		printf("\t -ngin = plik wejsciowy bazowy]\n");
+		printf("\t -out = plik wyjsciowy]\n");
+		printf("\t -ngout = nazwa pliku do ktorego ma byc zapisana baza \n");
+		printf("\t -is = ilosc slow ktore program ma wygenerowac\n");
+		printf("\t -rng = rzad n-gramow na podstawie ktorych ma byc generowany tekst\n");
+		printf("\t -stat = czy maja byc generowane statystyki slow\n");
 
 	return 1;
 }
@@ -47,19 +47,24 @@ attributes_t readAttributes(int argc, char** argv){
 	nginFileNumberDefault = 0; attributes.nginFileNumber = nginFileNumberDefault;					
 	errorDefault = 0; attributes.error = errorDefault;
 	
-	for (i = 1; i < (argc -1); i++){				// pliki wejsciowe z tekstem - maksymalnie 15
-		if (strcmp("-in", argv[i]) == 0) {
+	for (i = 1; i < (argc -1); i++){			
+		
+		if ((strcmp("-help", argv[i]) == 0)||(strcmp("-h", argv[i]) == 0)||(strcmp("-help", argv[i]) == 0)||(argc==1)) {		
+			help(); 
+			continue;
+		}
+		if (strcmp("-in", argv[i]) == 0) {			// pliki wejsciowe z tekstem - maksymalnie 15
 			a=0;
-			while(argv[++i][0]!='-'){
-				attributes.inFile[a]=argv[i];							
-				a++;
-				
+			while((argv[++i]) && (argv[i][0]!='-')){
+				attributes.inFile[a]=argv[i];
+				attributes.inFileNumber++; 							
+				a++;				
 			}
 			if (a==0){
 				attributes.inFileNumber = 0;
-				attributes.inFile[a] = "brak";
+				attributes.inFile[a] = "brak"; // TODO : tego tutaj nie powinno byc
 			}	
-			else attributes.inFileNumber = --a;
+			//else attributes.inFileNumber = --a;
 			i--;
 			continue;
 		}
@@ -104,6 +109,7 @@ attributes_t readAttributes(int argc, char** argv){
 		}
 		
 		if (strcmp("-rng", argv[i]) == 0) {		//rzad ngramow 
+			
 			attributes.ngramLevel = atoi(argv[++i]);
 			continue;
 		}
@@ -118,8 +124,10 @@ attributes_t readAttributes(int argc, char** argv){
 		}
 		
 		
+		
+		
 	}
-	if ((attributes.inFileNumber == 0)&&(attributes.nginFileNumber == 0)){
+	if ((attributes.inFileNumber + attributes.nginFileNumber) == 0){
 		printf("Nie zostaly podane wymagane dane wejsciowe.\n Prosze podac minimum jeden plik wejsciowy lub bazowy\n");
 		attributes.error = 1;
 	}
@@ -128,19 +136,19 @@ attributes_t readAttributes(int argc, char** argv){
 
 	int printAttributes(attributes_t attributes){
 	int a;
-	printf("Atrybuty tego wejscia to: \n");
+	printf("Atrybuty tego wejscia to: \n\n");
 	
-	printf("Pliki wejsciowe(inFile)(%d): ",attributes.inFileNumber);	
+	printf("Pliki wejsciowe(inFile)(%d): \t",attributes.inFileNumber);	
 	a=0;
-	while(a<=attributes.inFileNumber){
-		printf("-[ %s ]",attributes.inFile[a]);
+	while(a<attributes.inFileNumber){
+		printf("-[ %s ] ",attributes.inFile[a]);
 		a++;
 	}
 	printf("\n");
 	
-	printf("Pliki wejsciowe bazy(nginFile): ");
+	printf("Pliki wejsciowe bazy(nginFile): \t");
 	a=0;
-	while(a<=attributes.nginFileNumber){
+	while(a<attributes.nginFileNumber){
 		printf("-[ %s ]",attributes.nginFile[a]);
 		a++;
 	}	

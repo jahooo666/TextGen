@@ -88,7 +88,8 @@ int readNgramsFromTextFiles( char **fileName, int fileNumber, node **root, int r
 		}
 	}
 	
-};
+}
+
 
  
 

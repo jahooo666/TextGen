@@ -81,7 +81,6 @@ node* search(node **tree, char** valu,  int rng){
 }
 
 
-
 void printout(node * tree, int rng, int lvl){	
 // od ktorego wezla ma zaczac drukowac - rzad ngramow - poziom drukowania - zeby wygladalo jak drzewo 	
 	int i;
@@ -92,6 +91,22 @@ void printout(node * tree, int rng, int lvl){
 		printf("--noO=%d--nN=%d\n",tree->noO,tree->nextNumber);
 	//}
 	if(tree->right) printout(tree->right,rng,lvl+1);
+}
+
+
+void printConnections(node * tree, int rng, int lvl){
+	int i;
+	if(tree->left) printConnections(tree->left,rng,lvl+1);
+	//if((tree->nextNumber > 1)&&(tree->noO!=tree->nextNumber)){
+	for(i=0; i<rng; i++)
+	printf("%s ",tree->wArray[i]);
+	printf("\n");
+	for(i=0;i<tree->nextNumber;i++)
+		printf("\t -%d- %s\n",
+				tree->nextArray[i].noC,
+					tree->nextArray[i].nextEl->wArray[1]);	
+		//}
+	if(tree->right) printConnections(tree->right,rng,lvl+1);
 }
 
 

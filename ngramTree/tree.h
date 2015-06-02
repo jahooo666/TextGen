@@ -23,5 +23,5 @@ node* search(node **tree, char** valu, int rng);
 node* insert(node ** tree, node * item, int rng);
 node* add(node **tree, char** valu, int rng, node *last);
 void printout(node * tree, int rng, int lvl);
-
+void printConnections(node * tree, int rng, int lvl);
 #endif
