@@ -25,8 +25,8 @@ int main(int argc, char **argv){
 		root = NULL;				
 		readNgramsFromTextFiles( attributes.inFile, attributes.inFileNumber, &root, attributes.ngramLevel);		
 		//printout(root,attributes.ngramLevel,0);		
-		//gener(root, attributes.ngramLevel, attributes.wordNumber);
-		//printConnections(root,attributes.ngramLevel,0);
+		gener(root, attributes.ngramLevel, attributes.wordNumber);
+		printConnections(root,attributes.ngramLevel,0);
 		free(root);
 		//}
 		//else return 0;

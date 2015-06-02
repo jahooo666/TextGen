@@ -29,7 +29,7 @@ void gener(node * tree, int rng, int ls){
 		//printf("[%d]  ",suma);
 		if(suma!=0){
 			int los=rand()%suma;		
-			//printf("%d -",los);
+			printf("%d -",los);
 			int przedzial = 0;
 			while(los>1){
 				los=los-tree->nextArray[przedzial].noC;
