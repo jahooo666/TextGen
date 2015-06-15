@@ -1,5 +1,6 @@
 #include "input.h"
 #include "output.h"
+#include "statystyka.h"
 #include "./ngramTree/tree.h"
 #include "wordArray.h"
 #include "attributes.h"
@@ -28,11 +29,11 @@ int main(int argc, char **argv){
 		if(attributes.outFile==NULL)
 			gener(root, attributes.ngramLevel, attributes.wordNumber);
 		else
-			writeTextToTextFile(attributes.outFile, root, attributes.ngramLevel, attributes.wordNumber);	
+			writeTextToTextFile(attributes.outFile, root, attributes.ngramLevel, attributes.wordNumber);
+		if(attributes.statistics>0)
+			statystyka(root, attributes.ngramLevel,attributes.statistics);		
 		//printConnections(root,attributes.ngramLevel,0);
 		free(root);
-		//}
-		//else return 0;
 					
 	}
 	else 

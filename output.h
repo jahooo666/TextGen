@@ -10,7 +10,7 @@
 
 
 int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls);
-int writeNgramsToBinaryFile(char *fileName, node **root, int rng);
+int writeNgramsToBinaryFile(char *fileName, node *origTree, int rng);
 
 					 							
 

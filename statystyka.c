@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#include "./ngramTree/tree.h"
+#include "statystyka.h"
+
+
+void printConnectionsStat(node * tree, int rng, int lim){
+	int i;
+	if(tree->left) printConnectionsStat(tree->left,rng,lim);
+	//if((tree->nextNumber > 1)&&(tree->noO!=tree->nextNumber)){
+	if(tree->noO>=lim){
+		for(i=0; i<rng; i++)
+		printf("%s ",tree->wArray[i]);
+		printf("\n");
+		for(i=0;i<tree->nextNumber;i++)
+			printf("\t -%d- %s\n",
+					tree->nextArray[i].noC,
+						tree->nextArray[i].nextEl->wArray[1]);	
+		//}
+	}	
+	if(tree->right) printConnectionsStat(tree->right,rng,lim);
+}
+
+void statystyka(node * tree, int rng,int lim){
+printf("++++++++++++++++++++++++++++++\n");
+printf("=========STATYSTYKA===========\n");
+printf("++++++++++++++++++++++++++++++\n");
+printf("\n");
+printf("Ngramy wystepujace ponad %d razy\n",lim);
+printConnectionsStat(tree, rng, lim);
+printf("-------------KONIEC----------\n");
+}
+

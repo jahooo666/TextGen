@@ -115,11 +115,8 @@ attributes_t readAttributes(int argc, char** argv){
 		}
 		
 		if (strcmp("-stat", argv[i]) == 0) {		//czy maja byc generowane statystyki
-			i++;
-			if(((strcmp(argv[i],"0"))==0)||((strcmp(argv[i],"false"))==0))	// beda generowane o ile po "-stat" nie zostanie napisane "0" lub "false"
-				attributes.statistics=0;
-			else attributes.statistics=1;
-			i--;
+		
+			attributes.statistics = atoi(argv[++i]);
 			continue;
 		}
 		
@@ -159,7 +156,7 @@ attributes_t readAttributes(int argc, char** argv){
 	printf("Ilosc slow(wordNumber) = %d\n", attributes.wordNumber);
 	printf("Ilosc paragrafow(paragraphNumber) = %d\n", attributes.paragraphNumber);
 	printf("Rzad ngramow(ngramLevel) = %d\n", attributes.ngramLevel);
-	printf("Statystyki 0/1 (statistics)= %d\n", attributes.statistics);
+	printf("Statystyki (statistics)= %d\n", attributes.statistics);
 	
 		
 		

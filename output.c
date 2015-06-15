@@ -16,7 +16,7 @@ int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls){
 	int i,j;	
 	int suma;
 	i=0;
-	printf("Drukuje ngram %d rzedu\n",rng);
+	printf("Drukuje ngram %d rzedu do pliku %s\n",rng,fileName);
 	//drukowanie wszystkich wyrazow pierwszego ngramu
 	for(j=0;j<rng;j++)
 			fprintf(fp,"%s ",tree->wArray[j]);
@@ -49,9 +49,13 @@ int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls){
 		i++;	 
 	}
 	fprintf(fp,"\n");
+	fclose(fp);
 	return 0;	
 }
-int writeNgramsToBinaryFile(char *fileName, node **root, int rng){
+int writeNgramsToBinaryFile(char *fileName, node *origTree, int rng){
+FILE *fp;
+fp=fopen(fileName,"wb");
 
+	
 }
 
