@@ -9,7 +9,7 @@
 int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls){		
 // ls -liczba slow do wygenerowania
 	FILE *fp;
-	fp=fopen(fileName,"w");
+	fp=fopen(fileName,'w');
 		
 	node * tree = origTree;
 	srand(time(NULL));

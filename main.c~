@@ -28,7 +28,7 @@ int main(int argc, char **argv){
 		if(attributes.outFile==NULL)
 			gener(root, attributes.ngramLevel, attributes.wordNumber);
 		else
-			writeTextToTextFile(attributes.outFile, root, attributes.ngramLevel, attributes.wordNumber);	
+			writeTextToTextFile(attributes.outFile, root, attributes.ngramLevel, attributes.wordNumber){	
 		//printConnections(root,attributes.ngramLevel,0);
 		free(root);
 		//}

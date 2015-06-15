@@ -35,7 +35,7 @@ void gener(node * origTree, int rng, int ls){
 			int los=rand()%suma;		
 			//printf("%d -",los);
 			int przedzial = 0;
-			while(los>1){
+			while(los>tree->nextArray[przedzial].noC){
 				los=los-tree->nextArray[przedzial].noC;
 				przedzial++;
 			}

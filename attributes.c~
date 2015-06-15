@@ -37,7 +37,7 @@ attributes_t readAttributes(int argc, char** argv){
 	int inFileNumberDefault;
 	int nginFileNumberDefault;
 	
-	outFileDefault = NULL; attributes.outFile = outFileDefault; 
+	outFileDefault = null; attributes.outFile = outFileDefault; 
 	ngoutFileDefault = "base.mlg"; attributes.ngoutFile = ngoutFileDefault;
 	wordNumberDefault = 100; attributes.wordNumber = wordNumberDefault;
 	paragraphNumberDefault = 3; attributes.paragraphNumber = paragraphNumberDefault;

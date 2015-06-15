@@ -9,7 +9,7 @@
 int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls){		
 // ls -liczba slow do wygenerowania
 	FILE *fp;
-	fp=fopen(fileName,"w");
+	fp=fopen(fileName,w);
 		
 	node * tree = origTree;
 	srand(time(NULL));
@@ -51,7 +51,7 @@ int writeTextToTextFile(char *fileName, node *origTree, int rng, int ls){
 	fprintf(fp,"\n");
 	return 0;	
 }
-int writeNgramsToBinaryFile(char *fileName, node **root, int rng){
+int writeNgramsToBinaryFile(char **fileName, node **root, int rng){
 
 }
 
